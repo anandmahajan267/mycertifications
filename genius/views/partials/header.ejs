@@ -1,0 +1,34 @@
+<header>
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="/img/logo.png" alt="logo"/></a>
+                </div>
+                <div class="navbar-collapse collapse ">
+                    <ul class="nav navbar-nav">
+                        <li <% if (page_code == 'home') { %> class="active" <% } %> ><a href="/">Home</a></li> 
+						<li <% if (page_code == 'about') { %> class="active" <% } %> ><a href="/about">About Us</a></li>
+						<li <% if (page_code == 'services') { %> class="active" <% } %> ><a href="/services">Services</a></li>
+                        <li <% if (page_code == 'courses') { %> class="active" <% } %> ><a href="/courses">Courses</a></li>
+                        <li <% if (page_code == 'pricing') { %> class="active" <% } %> ><a href="/pricing">Pricing</a></li>
+                        <li <% if (page_code == 'contact') { %> class="active" <% } %> ><a href="/contact">Contact</a></li>
+                        <% if(session.user){ %>
+                        <li ><a href="/logout">Logout</a></li>
+                       
+                        <% }else{ %>
+                         <li <% if (page_code == 'login') { %> class="active" <% } %>><a href="/login">Login</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+
+            
+    
+
+            </div>
+        </div>
+	</header>

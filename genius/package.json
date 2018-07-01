@@ -1,0 +1,25 @@
+{
+  "name": "genius",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "*",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-ejs-layouts": "^2.3.1",
+    "express-session": "^1.15.6",
+    "jquery-form-validator": "^2.3.77",
+    "md5": "*",
+    "mongoose": "^4.11.6",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.1"
+  }
+}
