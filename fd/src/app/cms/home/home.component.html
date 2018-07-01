@@ -1,0 +1,88 @@
+
+<div class="HomePage">
+    <div id="sign-in-step" class="intro-container full-width">
+     <div class="intro wrapper">
+      <div class="sign-up animated fadeInUp">
+       <h1>Create and share memories that last forever</h1>
+       <h2>Start creating your personalised tribute now.</h2>
+       <div> 
+         <a *ngIf="!authService.isAuthenticated()"  class="button alt-link" (click)='authService.loginClick();' style="cursor: pointer">Dashboard</a>
+         <a *ngIf="authService.isAuthenticated()" [routerLink]="['/dashboard']" class="button alt-link" style="cursor: pointer">Dashboard</a>
+        <div *ngIf="!authService.isAuthenticated()" id="" class="sign-in">
+         <p  class="text-center"><strong>If you already have an account, please</strong> &nbsp;
+          <a style="cursor: pointer;"  class="alt-link" (click)='authService.loginClick();' >Sign in</a> </p>
+        </div>
+       </div>
+       <!--<div> <a class="button alt-link" style="cursor: pointer">Dashboard</a> </div>--> 
+      </div>
+      <div class="nav-arrow fadeInLevitate animated" id="ff">
+       <p>Discover</p>
+       <i class="fa fa-chevron-down"></i> </div>
+     </div>
+    </div>
+    <div id="about-section"> 
+     <!-- STEP ONE -->
+     <div class="main-container full-width animated" id="step-one">
+      <div id="step-one-animation-trigger" class="step-process"> It's Simple </div>
+      <div class="about-text main wrapper clearfix" id="step-one-image-animation-trigger">
+       <div class="step-details animated fadeIn wow" id="step-two-animation-trigger">
+        <h2>Create Your Own Tribute</h2>
+        <p>Create your own online tribute page as a celebration of life for a loved one who has passed on. Personalise your tribute by adding text, photo and video content to one of our templates.</p>
+       </div>
+       <div class="hiding animated fadeInUp wow image-holder" data-delay="1000"> <img src="./assets/img/step01-laptop.png" alt="" /> </div>
+      </div>
+     </div>
+     <!-- STEP TWO -->
+     <div class="main-container full-width" id="step-two">
+      <div id="step-two-animation-image-trigger" class="step-process"> Invite Others </div>
+      <div class="main wrapper clearfix" id="step-three-animation-trigger">
+       <div class="step-details animated fadeInUp wow">
+        <h2>Share And Pass It On</h2>
+        <p>Share your memories using your unique link or by uploading your address book to notify your friends and family by email.</p>
+       </div>
+       <div class="laptop image-holder animated fadeIn wow" data-delay="1000"> <img src="./assets/img/step01-laptop.png" alt="" /> </div>
+       <div class="animated slideInLeft wow image-holder arrow-mail" data-delay="1500"> <img src="./assets/img/arrow-mail.svg" data-delay="1500" alt="" /> </div>
+       <div class="image-holder iphone"> <img src="./assets/img/iphone.png" class="animated wow slideInRight" data-delay="1700" alt="" /> </div>
+      </div>
+     </div>
+     <!-- STEP THREE -->
+     <div class="main-container full-width animated" id="step-three">
+      <div id="step-three-animation-image-trigger" class="step-process"> Come Together and Remember </div>
+      <div class="main wrapper clearfix" id="step-four-animation-trigger">
+       <div class="step-details animated fadeIn wow" data-animation="fadeIn">
+        <h2>Community Content</h2>
+        <p>Your tribute will be full of memories and stories to celebrate the life of your loved one that has passed on. The tribute you have created shall continue to honour and remember them for generations to come.</p>
+       </div>
+       <div id="step-four-animation-image-trigger" class="image-holder laptop-container animated fadeInUp wow" data-delay="300"> <img src="./assets/img/step01-laptop.png" alt="" /> <img src="./assets/img/step-three-image-slide-one.jpg" class="screen-fade" alt="" /> <img src="./assets/img/step-three-image-slide-two.jpg" class="screen-fade" alt="" /> </div>
+      </div>
+     </div>
+     <!-- STEP FOUR -->
+     <div class="main-container full-width" id="step-four">
+      <div class="step-process"> Let the Memories Live On </div>
+      <div class="main wrapper clearfix">
+       <div class="step-details animated fadeInUp">
+        <h2>Share The Memories</h2>
+        <p>Once approved, your tribute will be full of memories and stories to celebrate the life of a loved one. The tribute you have created will continue to honor the deceased legacy and remember them in your life.</p>
+       </div>
+       <div class="image-holder animated fadeInUp wow" data-delay="300"> <img src="./assets/img/step04-laptop.png" alt="" /> </div>
+      </div>
+     </div>
+    </div>
+    <div class="outro-container full-width">
+     <div  *ngIf="!authService.isAuthenticated()" class="outro wrapper clearfix">
+      <h2 class="title">Create and share memories that last forever</h2>
+      <p>Start creating your personalised tribute now.</p>
+      <a class="cls-button-sml fancybox alt-link" 
+      style="cursor: pointer; color:#fff; text-decoration:none;" 
+      (click)='authService.signupClick();'>Sign up </a>
+      <div class="sign-in">
+       <p align="center"><strong>If you already have an account,please</strong> &nbsp;
+        <a class="fancybox alt-link" style="cursor: pointer;" (click)='authService.loginClick();'>Sign in</a> </p>
+      </div>
+     </div>
+    </div>
+   </div>
+   <script type="">
+    new WOW().init();
+   </script>
+   

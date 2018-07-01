@@ -1,0 +1,138 @@
+<div class="help-container full-width">
+  <div class="main wrapper clearfix">
+    <div class="banner">
+      <div class="banner-desc">
+        <div class="search-form-dt">
+          <input placeholder="Enter your search here." name="tribute_search_keyword" type="text" id="tribute_search_keyword" [(ngModel)]="tribute_search_keyword">
+          <button (click)="searchTribute();">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-container full-width SearchTributeResultsPage ng-scope">
+  <div class="main wrapper clearfix">
+    <div class="advanced-search l">
+      <div class="bread-crumb clearfix">
+        <ul>
+          <li>
+            <a>
+              <i class="icon-home-1"></i>
+            </a>
+          </li>
+          <li>
+            <i class="fa fa-home"></i>&nbsp;Search tributes page</li>
+        </ul>
+      </div>
+      <div class="clearfix">&nbsp;</div>
+      <div class="inner">
+        <h2>Advanced Search</h2>
+        <div id="advanced-form">
+          <form name="advancedFrm" id="advancedFrm" method="post" novalidate (ngSubmit)="onAdvanceFilter(advancedFrm)" #advancedFrm="ngForm">
+            <div>
+              <label for="advanced-first-name">First Name:
+                <!-- <span class="required_field">*</span> -->
+              </label>
+              <input name="keyword" type="text" id="keyword" [(ngModel)]="search.keyword" placeholder="First Name" #keyword="ngModel">
+            </div>
+            <div>
+              <label for="advanced-last-name">Last Name:
+                <!-- <span class="required_field">*</span> -->
+              </label>
+              <input name="last_name" type="text" id="last_name" [(ngModel)]="search.last_name" placeholder="Last Name" #keyword="ngModel">
+            </div>
+            <div>
+              <label for="country">Country
+                <!-- <span class="required_field">*</span> -->
+              </label>
+              <select class="drop-down form-control" 
+              name="country_id" 
+              [(ngModel)]="search.country" (ngModelChange)="onChangeCountry($event)" >
+                  <option label="Select Country"  [ngValue]="0" selected >-Select Country-</option>
+                  <option *ngFor="let list of countryList" [ngValue]="list.id"> {{list.name}}</option>
+                </select>
+            </div>
+            <div>
+              <label for="state">State</label>
+              <select class="drop-down form-control" 
+              name="state_id" 
+              [(ngModel)]="search.state" (ngModelChange)="onChangeState($event)">
+                  <option label="Select State" [ngValue]="0" selected>-Select State-</option>
+                  <option *ngFor="let list of stateList" [ngValue]="list.id"> {{list.name}}</option>
+                </select>
+            </div>
+            <div>
+              <label for="state">City</label>
+              <select class="drop-down form-control" 
+              name="suburb_id" 
+              [(ngModel)]="search.city">
+                  <option label="Select City" [ngValue]="0"  selected>-Select City-</option>
+                  <option *ngFor="let list of suburbList" [ngValue]="list.id"> {{list.name}}</option>
+                </select>
+            </div>
+            <div>
+              <div class="date-fields">
+                <label for="pod-year">PassedOn Year</label>
+                <input name="pod" type="text" id="pod" [(ngModel)]="search.pod" placeholder="PassedOn Year" #pod="ngModel">
+              </div>
+            </div>
+            <div>
+              <div>
+                <button class="button-sml button" type="submit"> Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="search-tribute-results l">
+      <div class="inner clearfix">
+        <div class="advanced-search-button">
+          <a fancybox="">advanced search</a>
+        </div>
+        <h1 class="title ng-hide">Search Results for : {{tribute_search_keyword}} </h1>
+        <!-- <div class="returned-results clearfix">
+          <p class="r ng-binding">Showing results 0 - 0</p>
+        </div> -->
+        <ul class="search-results">
+
+
+          <li class="clearfix" *ngFor="let item of tributeList">
+            <div class="l profile-image">
+              <a href="javascript:void(0);" title="{{item.first_name}} {{item.last_name}}">
+                <img *ngIf="item.original_cover_image" onError="this.src='./assets/img/profile-placeholder.jpg'" src="{{item.original_cover_image}}">
+                <img *ngIf="!item.original_cover_image" src="./assets/img/profile-placeholder.jpg" class="l ng-hide" alt="" ng-click="checkViewTribute(tribute)"
+                  ui-sref="view-tribute.theme({tributeId: tribute.id, tributeTheme: tribute.theme_id, preview: false})">
+              </a>
+            </div>
+            <div class="l profile-details clearfix">
+              <ul class="">
+                <li>
+                  <p>
+                    <a [routerLink]="['/tribute/details/', item.id,item.theme_id]">
+                      <strong class="ng-binding">{{item.first_name}} {{item.last_name}}</strong>
+                    </a>
+                  </p>
+                </li>
+                <li class="ng-binding">{{item.state.name}} {{item.country.name}}</li>
+                <li class="ng-binding">{{item.dob | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}} - {{item.pod | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</li>
+              </ul>
+              <a href="javascript:void(0);" class="r">View Tribute</a>
+            </div>
+          </li>
+          <!-- end ngRepeat: tribute in searchResults -->
+        </ul>
+
+        <div class="row">
+
+          <div class="full-width-info" *ngIf="(inProgressCall==true)">
+            Please wait...
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

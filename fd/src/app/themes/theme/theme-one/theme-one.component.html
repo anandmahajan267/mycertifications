@@ -1,0 +1,196 @@
+<link href="/assets/css/main-tribute.css" rel="stylesheet" />
+<link href="/assets/css/tribute-1.css" rel="stylesheet" />
+
+<div class="wrapper clearfix">
+  <div class="clearfix headertab">
+    <div class="width-fourty l">
+      <div class="hero-image">
+        <!-- <img src="assets/img/disneyworld.png" class="scale photo-style" alt="" /> -->
+        <img *ngIf="tribute.original_cover_image" onError="this.src='./assets/img/profile-placeholder.jpg'" src="{{tribute.original_cover_image}}"
+          alt="" class="scale photo-style" width="140" />
+        <img *ngIf="!tribute.original_cover_image" src="./assets/img/profile-placeholder.jpg" alt="" class="scale photo-style" width="140"
+        />
+      </div>
+    </div>
+    <div class="width-sixty r">
+      <div class="summary-new">
+        <h1>{{tribute.first_name}} {{tribute.last_name}}
+          <span>{{tribute.dob | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}} - {{tribute.pod | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</span>
+        </h1>
+        <div class="summary-detail pragraph" style="cursor: pointer">
+          <div *ngIf="tribute.biography">
+            <p class="intro" *ngIf="showShortDesc" (click)="showShortDesc = ! showShortDesc">
+              {{ tribute.biography | slice:0:450 }}
+              <span *ngIf="tribute.biography.length>450">...</span>
+            </p>
+            <p class="intro" *ngIf="!showShortDesc" (click)="showShortDesc = ! showShortDesc">
+              {{tribute.biography}}
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper clearfix">
+  <div class="width-fourty l clearfix">
+    <div class="side-nav l">
+      <section class="contribute-actions clearfix">
+        <h3>Menu</h3>
+        <ul>
+          <li [ngClass]="{current: currentTab==='home'}">
+            <a id="link_1" (click)="onTabChange('home');">
+              <i class="fa fa-home"></i>Home</a>
+          </li>
+          <li [ngClass]="{current: currentTab==='timeline'}">
+            <a id="link_2" (click)="onTabChange('timeline');">
+              <i class="fa fa-hourglass"></i>Timeline</a>
+          </li>
+          <li [ngClass]="{current: currentTab==='gallery'}">
+            <a id="link_3" (click)="onTabChange('gallery');">
+              <i class="fa fa-picture-o"></i>Gallery</a>
+          </li>
+          <li [ngClass]="{current: currentTab==='video'}">
+            <a id="link_4" (click)="onTabChange('video');">
+              <i class="fa fa-film"></i>Video</a>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h3>Share Page</h3>
+        <div class="inner">
+          <button class="button-sml-share-facebook"> </button>
+          <button class="button-sml-share-twitter"> </button>
+          <button class="button-sml-share-google"> </button>
+        </div>
+      </section>
+      <section class="inner admin">
+        <p class="ng-binding">Created by
+          <a *ngIf="tribute.user">{{tribute.user.first_name}} {{tribute.user.last_name}}</a> on {{tribute.created_date | amDateFormat:'LL' }}</p>
+      </section>
+    </div>
+  </div>
+  <div class="width-sixty r clearfix">
+    <div id="div_1" *ngIf="currentTab=='home'">
+      <div class="post-message post-wrapper">
+        <form action="" id="message-post" class="clearfix">
+          <p>
+            <i class="icon-feather"></i>Leave a message</p>
+          <textarea id="message-post-area" cols="30" rows="3"></textarea>
+
+          <input *ngIf="!authService.isAuthenticated()" (click)="authService.loginClick();" class="button-sml r" value="sign-in/register"
+            type="button">
+          <input *ngIf="authService.isAuthenticated()" class="button-sml r" value="Post" type="submit">
+        </form>
+      </div>
+      <div id="report-abuse-view-tribute" style="display: none; width: 400px">
+        <p class="title-popup">Report Issue to PassedOn</p>
+        <form id="reportIssueForm1" name="" method="post">
+          <div style="margin: 10px">
+            <select name="" class="form-control">
+              <option value="" selected="selected">Select Reason</option>
+            </select>
+          </div>
+          <div style="margin: 10px">
+            <textarea name="issue_description" maxlength="4000" required class=""></textarea>
+          </div>
+          <p class="characters">4000 characters remaining</p>
+          <div style="padding: 10px; text-align: right">
+            <input class="button-sml button" value="Continue" type="submit" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="div_2" *ngIf="currentTab=='timeline'">
+
+      <div class="timeline">
+        <div class="timeline-container clearfix">
+          <div class="year-entry">
+            <p>2015</p>
+          </div>
+          <div class="entry-container clearfix">
+            <div class="ng-scope"> </div>
+          </div>
+          <div class="year-entry">
+            <p>2016</p>
+          </div>
+          <div class="entry-container clearfix">
+            <div class="ng-scope"> </div>
+          </div>
+          <div class="year-entry">
+            <p>2017</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="div_3" *ngIf="currentTab=='gallery'">
+      <div class="gallery-controls clearfix">
+        <select id="filter-options" name="albumName" class="filter-options">
+          <option value="" class="" selected="selected">Show All</option>
+        </select>
+        <a class="fancybox button-sml cls_gallery_controls_button_sml r ng-hide" style="width:auto">Upload Image</a>
+        <a class="fancybox button-sml cls_gallery_controls_button_sml r ng-hide" style="width:auto">Create Album</a>
+      </div>
+      <div class="gallery-images">
+        <figure class="photo album-1">
+          <div class="photo-style">
+            <a href="#" rel="group" data-toggle="modal" data-target="#myModal">
+              <img src="assets/img/gallery-1.png" class="scale" alt=""> </a>
+            <a href="#" class="reply top"> Comment</a>
+            <div class="gallery-view-comment bottom" style="display:none;">
+              <ul class="media-list">
+                <input id="comment" name="comment" type="text">
+                <button ng-show="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="sign-in">sign in/register</button>
+                <!--<button ng-hide="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="submit">Comment</button>-->
+              </ul>
+            </div>
+          </div>
+        </figure>
+        <figure class="photo album-1">
+          <div class="photo-style">
+            <a href="#" rel="group">
+              <img src="assets/img/gallery-2.png" class="scale" alt=""> </a>
+            <a href="#" class="reply top"> Comment</a>
+            <div class="gallery-view-comment bottom" style="display:none;">
+              <ul class="media-list">
+                <input id="comment" name="comment" type="text">
+                <button ng-show="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="sign-in">sign in/register</button>
+                <!--<button ng-hide="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="submit">Comment</button>-->
+              </ul>
+            </div>
+          </div>
+        </figure>
+        <figure class="photo album-1">
+          <div class="photo-style">
+            <a href="#" rel="group">
+              <img src="assets/img/gallery-3.png" class="scale" alt=""> </a>
+            <a href="#" class="reply top"> Comment</a>
+            <div class="gallery-view-comment bottom" style="display:none;">
+              <ul class="media-list">
+                <input id="comment" name="comment" type="text">
+                <button ng-show="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="sign-in">sign in/register</button>
+                <!--<button ng-hide="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="submit">Comment</button>-->
+              </ul>
+            </div>
+          </div>
+        </figure>
+        <figure class="photo album-1">
+          <div class="photo-style">
+            <a href="#" rel="group">
+              <img src="assets/img/gallery-4.png" class="scale" alt=""> </a>
+            <a href="#" class="reply top"> Comment</a>
+            <div class="gallery-view-comment bottom" style="display:none;">
+              <ul class="media-list">
+                <input id="comment" name="comment" type="text">
+                <button ng-show="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="sign-in">sign in/register</button>
+                <!--<button ng-hide="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="submit">Comment</button>-->
+              </ul>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+    <div id="div_4" *ngIf="currentTab=='video'">4</div>
+  </div>
+</div>

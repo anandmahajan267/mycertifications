@@ -1,0 +1,29 @@
+
+<div class="container">
+    <div class="row">
+    <div class="col-md-12">
+     <div class="main wrapper">
+      <aside class="contact-section">
+       <h3 class="title">Contact Form</h3>
+       <form name="contactUsForm" id="contactUsForm" method="post" novalidate="" >
+        <div>
+         <label for="popup-first-name" style="color:#fff;">Name:</label>
+         <input id="popup-first-name" placeholder="Name" name="name" required="" type="text">
+        </div>
+        <div>
+         <label for="popup-email-address" style="color:#fff;">Email Address:</label>
+         <input name="email" required="" ng-model="contact.email" id="popup-email-address" placeholder="Email Address" type="email">
+        </div>
+        <div>
+         <label for="popup-address1" style="color:#fff;">Comment: </label>
+         <textarea name="comment" id="comment" cols="30" rows="10" required="" placeholder="Your Comment" ></textarea>
+        </div>
+        <div>
+         <button class="button-form" type="submit">Send</button>
+        </div>
+       </form>
+      </aside>
+     </div>
+     </div>
+     </div>
+    </div>

@@ -1,0 +1,55 @@
+<ng-container >
+  <div class="side-panel cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1 side_panel">
+    <aside>
+      <div class="logo">
+        <a [routerLink]="['/home']">
+          <img src="./assets/img/passed-on-logo.svg" alt="PassedOn logo" /> </a>
+      </div>
+      <h2>
+        <a [routerLink]="['/dashboard']">
+          <i class="fa fa-gauge"></i>Dashboard</a>
+      </h2>
+      <nav>
+        <p class="title">
+          <a>
+            <i class="fa fa-eye"></i>Your Tributes</a>
+        </p>
+        <ul>
+          <li>
+            <a [routerLink]="['/tribute/view']">
+              <strong>View</strong>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/tribute/create']">
+              <strong>Create</strong>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <p class="title">
+          <a>
+            <i class="fa fa-user"></i>My Account</a>
+        </p>
+        <ul>
+          <li>
+            <a [routerLink]="['/profile']">
+              <strong>Profile</strong>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+
+      <form id="search-tribute-form" class="clearfix">
+        <label for="tribute-search">
+          <i class="fa fa-search"></i> &nbsp;Tribute Finder</label>
+        <!-- <input type="text" id="tribute_search_keyword" name="tribute-search" placeholder="Type name here" /> -->
+        <input name="tribute_search_keyword" type="text" id="tribute_search_keyword" [(ngModel)]="tribute_search_keyword"  placeholder="Type name here" />
+        <a style="cursor:pointer; margin-top:10px;" (click)="advancedTribute();">advanced search</a>
+        <input type="button" class="button-sml button r" value="Search" style="margin-top:10px;" (click)="searchTribute();" />
+      </form>
+    </aside>
+  </div>
+</ng-container>

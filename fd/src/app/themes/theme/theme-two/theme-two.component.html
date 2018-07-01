@@ -1,0 +1,266 @@
+<link href="/assets/css/main-tribute.css" rel="stylesheet" />
+<link href="/assets/css/tribute-2.css" rel="stylesheet" />
+<div class="outer">
+  <div class="wrapper">
+    <header class="clearfix">
+      <div class="hero-image">
+        <!-- <img src="assets/img/brian-ralph.png" class="scale photo-style" alt="" />  -->
+        <img *ngIf="tribute.original_cover_image" onError="this.src='./assets/img/profile-placeholder.jpg'" src="{{tribute.original_cover_image}}"
+          alt="" class="scale photo-style" width="140" />
+        <img *ngIf="!tribute.original_cover_image" src="./assets/img/profile-placeholder.jpg" alt="" class="scale photo-style" width="140"
+        />
+      </div>
+      <div class="summary-new">
+        <h1 style="color: #333">{{tribute.first_name}} {{tribute.last_name}}
+          <span>{{tribute.dob | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}} - {{tribute.pod | amParse:'YYYY-MM-DD' | amDateFormat:'DD/MM/YYYY'}}</span>
+        </h1>
+
+        <div class="summary-detail pragraph" style="cursor: pointer">
+          <div *ngIf="tribute.biography">
+            <p class="intro" *ngIf="showShortDesc" (click)="showShortDesc = ! showShortDesc">
+              {{ tribute.biography | slice:0:450 }}
+              <span *ngIf="tribute.biography.length>450">...</span>
+            </p>
+            <p class="intro" *ngIf="!showShortDesc" (click)="showShortDesc = ! showShortDesc">
+              {{tribute.biography}}
+            </p>
+          </div>
+        </div>
+
+
+      </div>
+    </header>
+  </div>
+</div>
+<div class="outer main-nav">
+  <div class="wrapper">
+    <nav class="contribute-actions">
+      <li [ngClass]="{current: currentTab==='home'}">
+        <a id="link_1" style="cursor: pointer;" (click)="onTabChange('home');">
+          <i class="fa fa-home"></i>Home</a>
+      </li>
+      <li [ngClass]="{current: currentTab==='timeline'}">
+        <a id="link_2" style="cursor: pointer;" (click)="onTabChange('timeline');">
+          <i class="fa fa-hourglass"></i>Timeline</a>
+      </li>
+      <li [ngClass]="{current: currentTab==='gallery'}">
+        <a id="link_3" style="cursor: pointer;" (click)="onTabChange('gallery');">
+          <i class="fa fa-picture-o"></i>Gallery</a>
+      </li>
+      <li [ngClass]="{current: currentTab==='video'}">
+        <a id="link_4" style="cursor: pointer;" (click)="onTabChange('video');">
+          <i class="fa fa-film"></i>Video</a>
+      </li>
+    </nav>
+  </div>
+</div>
+<div class="wrapper main clearfix">
+  <div class="width-fourty r clearfix">
+    <div class="side-nav l">
+      <section>
+        <h3>Share Page</h3>
+        <div class="inner">
+          <button class="button-sml-share-facebook"> </button>
+          <button class="button-sml-share-twitter"> </button>
+          <button class="button-sml-share-google"> </button>
+        </div>
+      </section>
+      <section class="inner admin">
+        <p>Created by
+          <a *ngIf="tribute.user">{{tribute.user.first_name}} {{tribute.user.last_name}}</a> on {{tribute.created_date | amDateFormat:'LL' }}</p>
+      </section>
+    </div>
+  </div>
+  <!-- Home -->
+  <div class="width-sixty l clearfix">
+    <div>
+
+      <div id="div_1" *ngIf="currentTab=='home'">
+        <div class="post-message post-wrapper">
+            <form name="postFrm" id="message-post" class="clearfix " method="post" novalidate (ngSubmit)="onPostSubmit(postFrm)" #postFrm="ngForm">
+            <p>
+              <i class="icon-feather"></i>Leave a message</p>
+            <textarea name="message_post" id="message_post" cols="30" rows="3" ngModel #message_post="ngModel" required></textarea>
+            <div *ngIf="message_post.invalid && (message_post.dirty || message_post.touched)">
+                <p class="error-block" *ngIf="message_post.errors.required">Please enter message</p>
+            </div>
+            <input *ngIf="!authService.isAuthenticated()" (click)="authService.loginClick();" class="button-sml r" value="sign-in/register"
+              type="button">
+            <button *ngIf="authService.isAuthenticated()" class="button-sml r" id="post-button" [disabled]="!postFrm.valid" type="submit">Post</button>
+          </form>
+        </div>
+
+<div *ngIf="post.length>0">
+        <div class="post-wrapper" *ngFor="let item of post; let i = index;">
+
+          <div class="post cls_post">
+            <div class="post-details clearfix">
+              <img class="l post-profile-image" src="assets/img/profile-placeholder.jpg" alt="" />
+              <p> {{item.user.first_name}} {{item.user.last_name}}
+                <span class="post-date">{{item.created_date | amDateFormat:'LL' }}</span>
+              </p>
+              <div class="post-approval clearfix r" id="post-approval">
+                <div class="bs-example">
+                  <div class="dropdown">
+                    <a href="#" class="r-margin-4 glyphicon glyphicon-ok" style="color:green !important"></a>
+                    <a href="#" data-toggle="tooltip" class="r-margin-4 glyphicon glyphicon-remove"></a>
+                    <a href="" data-toggle="tooltip" class="r-margin-4 glyphicon glyphicon-ban-circle ng-scope"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix">
+              <p>
+                <span>{{item.content}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="post-actions clearfix">
+            <ul class="l">
+              <li *ngIf="!authService.isAuthenticated()">
+                <a href="javascript:void(0);" (click)="authService.loginClick();" class="reply">
+                  <i class="icon-pencil"></i>sign in/register </a>
+              </li>
+              <li *ngIf="authService.isAuthenticated()">
+                <a href="javascript:void(0);" (click)="(showPost[i] = !showPost[i]); (showComment[i]=false)" class="reply">
+                  <i class="icon-comment"></i>Post Comment</a>
+              </li>
+            </ul>
+            <ul class="r">
+              <li>
+                <a href="javascript:void(0);" (click)="(showComment[i] = !showComment[i]); (showPost[i]=false)" class="reply pull-right"> 
+                  
+                  <span *ngIf="item.comment_list">
+                      Comment<span *ngIf="item.comment_list.length>1">'s</span> ({{item.comment_list.length}}) </span>
+                  <span *ngIf="!item.comment_list"> Comment (0) </span>
+                </a>
+              </li>
+            </ul>
+
+
+
+          </div>
+          <div class="post-comment show" [ngClass]="{show: showPost[i]}">
+            <img class="l post-profile-image" src="assets/img/profile-placeholder.jpg" alt="" />
+            <form name="postCommentFrm" class="post-comment-from" method="post" novalidate (ngSubmit)="onPostCommentSubmit(postCommentFrm,item.id)" #postCommentFrm="ngForm">
+              <!-- <textarea name="" cols="30" rows="10" placeholder="write comment..."></textarea> -->
+
+              <textarea name="message_post_comment" id="message_post_comment" placeholder="write comment..." cols="30" rows="3" ngModel #message_post_comment="ngModel" required></textarea>
+              <div *ngIf="message_post_comment.invalid && (message_post_comment.dirty || message_post_comment.touched)">
+                  <p class="error-block" *ngIf="message_post_comment.errors.required">Please enter comments</p>
+              </div>
+
+              <button class="button-sml post-button" id="post-comment-button-{{item.id}}" [disabled]="!postCommentFrm.valid" type="submit">Post</button>
+            </form>
+          </div>
+          <div class="post-view-comment " [ngClass]="{show: showComment[i]}" *ngIf="item.comment_list">
+            <div class="panel-body" style="overflow-y: auto; max-height:400px;">
+              <ul class="media-list" style="margin: 0px;">
+                <li *ngFor="let item2 of item.comment_list">
+                  <img class="l post-profile-image" src="assets/img/profile-placeholder.jpg">
+
+                  <div class="media-body">
+                    <div class="media-heading">
+                      <span class="commented_user_name">{{item2.user.first_name}} {{item2.user.last_name}}</span>
+                      <span></span>
+                      <small class="pull-right">
+                        <span class="created_date">{{item2.created_date | amDateFormat:'LL' }}</span>
+                      </small>
+
+                    </div>
+                    <p>
+                      <small class="ng-binding">{{item2.content}}</small>
+                    </p>
+                  </div>
+                  <hr style="margin: 0px 0px 10px 0px;">
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline-container clearfix" id="div_2" *ngIf="currentTab=='timeline'">
+
+        <div class="timeline">
+          <div class="timeline-container clearfix">
+            <div class="year-entry">
+              <p>2017</p>
+            </div>
+            <div class="entry-container clearfix">
+              <div class="ng-scope"> </div>
+            </div>
+            <div class="year-entry">
+              <p>2017</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Gellery -->
+      <div class="gallery-images" id="div_3" *ngIf="currentTab=='gallery'">
+        <figure class="photo album-1">
+          <div class="photo-style">
+            <a href="#" rel="group">
+              <img src="assets/img/gallery-1.png" class="scale" alt=""> </a>
+            <a href="#" class="reply top"> Comment</a>
+            <div class="gallery-view-comment bottom" style="display:none;">
+              <ul class="media-list">
+                <input id="comment" name="comment" type="text">
+                <button ng-show="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px; color:#fff !important;" id="sign-in">sign in/register</button>
+                <!--<button ng-hide="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="submit">Comment</button>-->
+              </ul>
+            </div>
+          </div>
+        </figure>
+        <figure class="photo album-1">
+          <div class="photo-style">
+            <a href="#" rel="group">
+              <img src="assets/img/gallery-2.png" class="scale" alt=""> </a>
+            <a href="#" class="reply top"> Comment</a>
+            <div class="gallery-view-comment bottom" style="display:none;">
+              <ul class="media-list">
+                <input id="comment" name="comment" type="text">
+                <button ng-show="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px; color:#fff !important;" id="sign-in">sign in/register</button>
+                <!--<button ng-hide="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="submit">Comment</button>-->
+              </ul>
+            </div>
+          </div>
+        </figure>
+        <figure class="photo album-1">
+          <div class="photo-style">
+            <a href="#" rel="group">
+              <img src="assets/img/gallery-3.png" class="scale" alt=""> </a>
+            <a href="#" class="reply top"> Comment</a>
+            <div class="gallery-view-comment bottom" style="display:none;">
+              <ul class="media-list">
+                <input id="comment" name="comment" type="text">
+                <button ng-show="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px; color:#fff !important;" id="sign-in">sign in/register</button>
+                <!--<button ng-hide="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="submit">Comment</button>-->
+              </ul>
+            </div>
+          </div>
+        </figure>
+        <figure class="photo album-1">
+          <div class="photo-style">
+            <a href="#" rel="group">
+              <img src="assets/img/gallery-4.png" class="scale" alt=""> </a>
+            <a href="#" class="reply top"> Comment</a>
+            <div class="gallery-view-comment bottom" style="display:none;">
+              <ul class="media-list">
+                <input id="comment" name="comment" type="text">
+                <button ng-show="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px; color:#fff !important;" id="sign-in">sign in/register</button>
+                <!--<button ng-hide="true" class="btn btn-sm btn-primary pull-right" style="margin-top:5px" id="submit">Comment</button>-->
+              </ul>
+            </div>
+          </div>
+        </figure>
+      </div>
+      <div id="div_4" *ngIf="currentTab=='video'">Video</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<footer id="main_footer">
+    <nav>
+        <ul>
+            <!-- <li><a href="#">Our Partners</a>
+                </li>-->
+            <li>
+                <a routerLink="/help">Help</a>
+            </li>
+            <li>
+                <a routerLink="/contact-us">Contact Us</a>
+            </li>
+            <li>
+                <a routerLink="/privacy">Privacy</a>
+            </li>
+            <li>
+                <a routerLink="/terms">Terms</a>
+            </li>
+            <li>
+                <a href="https://www.facebook.com/passedon2" target="_blank">
+                    <i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+            </li>
+            <li>
+                <a href="https://twitter.com/passedon_com" target="_blank">
+                    <i class="fa fa-twitter"></i>&nbsp; Twitter</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="copy"> &copy; 2014-2017 PassedOn </div>
+</footer>
+<script>
+    //new WOW().init();
+  </script>
+
+<script>
+        var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+            showLeftPush = document.getElementById( 'showLeftPush' ),
+            body = document.body;
+
+        showLeftPush.onclick = function() {
+            alert(3);
+            classie.toggle( this, 'active' );
+            classie.toggle( body, 'cbp-spmenu-push-toright' );
+            classie.toggle( menuLeft, 'cbp-spmenu-open' );
+            disableOther( 'showLeftPush' );
+        };
+        
+
+        function disableOther( button ) {
+            if( button !== 'showLeftPush' ) {
+                classie.toggle( showLeftPush, 'disabled' );
+            }
+            
+        }
+    </script>

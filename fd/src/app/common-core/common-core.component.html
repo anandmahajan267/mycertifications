@@ -1,0 +1,246 @@
+<a style="display: none;" #aTagLogin *ngIf="!authService.isAuthenticated()" class="nav-link cls_a" (click)="openLogin(model_signin)">Sign In </a>
+<a style="display: none;" #aTagSignup *ngIf="!authService.isAuthenticated()" class="nav-link cls_a" (click)="openSignup(model_signup)">Sign Up</a>
+
+
+<ng-template #model_signin let-c="close" let-d="dismiss">
+  <div class="clearfix popup-box">
+
+    <div class="">
+      <div class="modal-header">
+        <h4 class="modal-title">Sign in option</h4>
+        <button type="button" class="close" (click)="c('Close click')">
+          <span aria-hidden="true">
+            <img src="./assets/img/close-btn.png" alt="" />
+          </span>
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="form-intro" style="font-size: 13px;">
+          <strong>Sign in using one of the following options below.</strong>
+        </p>
+        <div class="social-login-container cls_social_container">
+          <button class="social-button btn-facebook cls_social_container">
+            <i class="fa fa-facebook"></i>Sign in with Facebook </button>
+          <span>OR</span>
+        </div>
+        <div class="form">
+          <div class="sign-in-form">
+            <form name="signInForm" id="signInForm" method="post" novalidate (ngSubmit)="onSignin(loginFrm)" #loginFrm="ngForm">
+              <div>
+                <input name="email" type="email" id="email" [(ngModel)]="user.email" placeholder="Email Address" #email="ngModel" required
+                  email>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                  <p class="error-block" *ngIf="email.errors.required">Please enter email address</p>
+                  <p class="error-block" *ngIf="!email.errors.required && email.errors.email">Please enter valid email address</p>
+                </div>
+              </div>
+              <div>
+                <input name="password" type="password" id="password" [(ngModel)]="user.password" placeholder="Password" #password="ngModel"
+                  required>
+                <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                  <p class="error-block" *ngIf="password.errors.required">Please enter password</p>
+                </div>
+              </div>
+              <div> Remember Me:
+                <input type="checkbox" name="remember" id="rememberMe" ngModel />
+              </div>
+              <div class="clearfix popup-box">
+                <a class="password-cta cls_a" href="javascript:void(0);" (click)="c('Close click');openForgotPassword(model_forgot_password)">Forgot Password?</a>
+                <button type="submit" class="button-sml r" id="sign-in-button">Sign In</button>
+              </div>
+            </form>
+            <div class="sign-in">
+              <p>Don't have an account yet? please
+                <a class="alt-link" href="javascript:void(0);" (click)="c('Close click');openSignup(model_signup)" data-dismiss="modal">Sign up</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+        </div> -->
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #model_forgot_password let-c="close" let-d="dismiss">
+  <div class="clearfix popup-box">
+
+    <div class="">
+      <div class="modal-header">
+        <h4 class="modal-title">Forget your password</h4>
+        <button type="button" class="close" (click)="c('Close click')">
+          <span aria-hidden="true">
+            <img src="./assets/img/close-btn.png" alt="" />
+          </span>
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="box-inner clearfix" *ngIf="fpSuccess">
+          <h1 class="title">
+            Please check your email
+          </h1>
+
+          <p>
+            <strong>A new password has been sent to your provided email address. Please check your email for link to update your
+              password.</strong>
+          </p>
+
+          <p>
+            <strong></strong>
+          </p>
+        </div>
+        <div *ngIf="!fpSuccess">
+        <p class="form-intro" style="font-size: 13px;">
+          <strong>Can't sign in? Forget your password?</strong>
+        </p>
+
+        <div id="user2">
+          <form name="forgotPasswordFrm" id="forgotPasswordFrm" method="post" novalidate (ngSubmit)="onForgotPassword(forgotPasswordFrm)"
+            #forgotPasswordFrm="ngForm">
+            <div style="padding: 10px;">
+              <div>
+                <!-- <input name="email" type="email" id="email" placeholder="Email Address"> -->
+                <input name="email" type="email" id="email" ngModel placeholder="Email Address" #email="ngModel" required email>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                  <p class="error-block" *ngIf="email.errors.required">Please enter email address</p>
+                  <p class="error-block" *ngIf="!email.errors.required && email.errors.email">Please enter valid email address</p>
+                </div>
+              </div>
+              <div>
+                <recaptcha (resolved)="fpCallback($event)" siteKey="{{_recaptchaKey}}"></recaptcha>
+                <p class="error-block" *ngIf="(fpRKeyTouch && fpRKey=='')">Please select captcha</p>
+              </div>
+
+              <!-- -->
+
+              <div class="clearfix"></div>
+              <div class="popup-box">
+                <button type="submit" class="button-sml r" id="forgot-password-button" [disabled]="!forgotPasswordFrm.valid">Send</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        </div>
+
+
+      </div>
+      <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Close</button>
+        </div> -->
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+<!-- Signup Modal -->
+<ng-template #model_signup let-c="close" let-d="dismiss">
+  <div class="clearfix popup-box">
+    <!-- <div class="modal fade" id="signupIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document"> -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Sign up(funeral director) now it's Free</h4>
+        <button type="button" class="close" (click)="c('Close click')">
+          <span aria-hidden="true">
+            <img src="./assets/img/close-btn.png" alt="" />
+          </span>
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div id="user2">
+          <form name="signupFrm" id="signupFrm" method="post" novalidate (ngSubmit)="onSignUp(signupFrm)" #signupFrm="ngForm">
+            <div class="form_1">
+              <div>
+                <input name="first_name" type="text" id="first_name" [(ngModel)]="user.first_name" placeholder="First Name" #first_name="ngModel"
+                  required>
+                <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+                  <p class="error-block" *ngIf="first_name.errors.required">Please enter first name</p>
+                </div>
+              </div>
+              <div>
+                <!-- <input name="email" type="email" id="email" placeholder="Email Address"> -->
+                <input name="email" type="email" id="email" [(ngModel)]="user.email" placeholder="Email Address" #email="ngModel" required
+                  email>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                  <p class="error-block" *ngIf="email.errors.required">Please enter email address</p>
+                  <p class="error-block" *ngIf="!email.errors.required && email.errors.email">Please enter valid email address</p>
+                </div>
+              </div>
+              <div>
+                <input name="new_password" type="password" id="new_password" [(ngModel)]="user.password" placeholder="Password" #new_password="ngModel"
+                  required>
+                <div *ngIf="new_password.invalid && (new_password.dirty || new_password.touched)">
+                  <p class="error-block" *ngIf="new_password.errors.required">Please enter new password</p>
+                </div>
+              </div>
+              <div>
+                <input name="confirm_new_password" type="password" id="confirm_new_password" ngModel #confirm_new_password="ngModel" placeholder="Confirm Password"
+                  [equalTo]="new_password" required>
+                <div *ngIf="confirm_new_password.invalid && (confirm_new_password.dirty || confirm_new_password.touched)">
+                  <p class="error-block" *ngIf="confirm_new_password.errors.required">Please enter confirm new password</p>
+                  <p class="error-block" *ngIf="!confirm_new_password.errors.required && confirm_new_password.errors.equalTo"> Password & Confirm password both should be same</p>
+                </div>
+              </div>
+            </div>
+            <!-- -->
+            <div class="form_2">
+              <div>
+                <input name="last_name" type="text" id="last_name" [(ngModel)]="user.last_name" placeholder="Last Name" #last_name="ngModel"
+                  required>
+                <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+                  <p class="error-block" *ngIf="last_name.errors.required">Please enter last name</p>
+                </div>
+              </div>
+              <div>
+                <!-- <input name="contact_person" type="text" id="contact_person" placeholder="Contact Person"> -->
+                <input name="contact_person" type="text" id="contact_person" [(ngModel)]="user.contact_person" placeholder="Contact Person"
+                  #contact_person="ngModel">
+              </div>
+              <div>
+                <input name="phone_number" type="text" id="phone_number" [(ngModel)]="user.phone_number" placeholder="Phone Number" #phone_number="ngModel">
+              </div>
+              <div>
+                <input name="abn" type="text" id="abn" [(ngModel)]="user.abn" placeholder="ABN" #abn="ngModel">
+              </div>
+            </div>
+            <div>
+              <textarea name="address" id="address" [(ngModel)]="user.address" placeholder="Address" #address="ngModel"></textarea>
+            </div>
+            <div>
+              <recaptcha (resolved)="signUpCallback($event)" siteKey="{{_recaptchaKey}}"></recaptcha>
+              <p class="error-block" *ngIf="(signupRKeyTouch && signupRKey=='')">Please select captcha</p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="sign-in">
+              <p>By clicking
+                <a href="javascript:void(0);" class="alt-link" (click)="c('Close click');openLogin(model_signin);">
+                  <strong>Sign In</strong>
+                </a> you agree to Checkspaces
+                <a [routerLink]="['/terms']" target="_blank">terms of use</a> and
+                <a [routerLink]="['/privacy']" target="_blank">privacy policy</a>
+              </p>
+            </div>
+            <div class="popup-box">
+              <button type="submit" class="button-sml r" id="signup-button" [disabled]="!signupFrm.valid">Sign Up</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <!-- </div>
+    </div> -->
+  </div>
+</ng-template>

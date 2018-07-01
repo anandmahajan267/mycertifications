@@ -1,0 +1,686 @@
+<div class="clearfix">&nbsp;</div>
+<div class="clearfix">&nbsp;</div>
+<!-- Right Side -->
+<div class="main-content dashboard-top-margin">
+  <div class="content-container clearfix">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-intro">
+            <h2>Create your online tribute today</h2>
+            <p>It only takes a few moments.</p>
+          </div>
+        </div>
+        <div class="progressTabs">
+          <div class="col-md-12">
+            <div class="board">
+              <ul class="nav nav-tabs" style="border:0;">
+                <div class="liner"></div>
+                <li [ngClass]="{active: currentTab==='profile'}" (click)="onTabChange('profile');">
+                  <a href="javascript:void(0);" class="btn">
+                    <span>1</span>
+                  </a>
+                  <small class="small-1">Profile
+                    <br> Details
+                  </small>
+                </li>
+                <li [ngClass]="{active: currentTab==='biography'}" (click)="onTabChange('biography');">
+                  <a href="javascript:void(0);" class="btn">
+                    <span>2</span>
+                  </a>
+                  <small class="small-2">Biography</small>
+                </li>
+                <li [ngClass]="{active: currentTab==='profile_image'}" (click)="onTabChange('profile_image');">
+                  <a href="javascript:void(0);" class="btn">
+                    <span>3</span>
+                  </a>
+                  <small class="small-3">Profile Image </small>
+                </li>
+                <li [ngClass]="{active: currentTab==='media'}" (click)="onTabChange('media');">
+                  <a href="javascript:void(0);" class="btn">
+                    <span>4</span>
+                  </a>
+                  <small class="small-4">Media</small>
+                </li>
+                <li [ngClass]="{active: currentTab==='themes'}" (click)="onTabChange('themes');">
+                  <a href="javascript:void(0);" class="btn">
+                    <span>5</span>
+                  </a>
+                  <small class="small-5">Themes</small>
+                </li>
+                <!-- <li [ngClass]="{active: currentTab==='contacts'}" (click)="onTabChange('contacts');">
+                  <a href="javascript:void(0);" class="btn">
+                    <span>6</span>
+                  </a>
+                  <small class="small-6">Contacts</small>
+                </li> -->
+                <li [ngClass]="{active: currentTab==='publish'}" (click)="onTabChange('publish');">
+                  <a href="javascript:void(0);" class="btn">
+                    <span style="margin: 0 5px;">6</span>
+                  </a>
+                  <small class="small-7">Publish </small>
+                </li>
+              </ul>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="tab-content">
+              <div class="tab-pane" [ngClass]="{active: currentTab==='profile'}" id="step-1" style="border:0">
+                <form name="profileFrm" id="profileFrm" method="post" novalidate (ngSubmit)="onProfileUpdate(profileFrm)" #profileFrm="ngForm">
+                  <div class="row">
+                    <div class="col-md-8">
+
+                      <div class="box-inner clearfix">
+                        <p>
+                          <strong>Tribute for :</strong>
+                        </p>
+                        <div>
+
+                          <div>
+                            <label for="first_name">First Name
+                              <span class="required_field">*</span>
+                            </label>
+                            <!-- <input id="first-name" placeholder="First name" name="first_name" type="text"> -->
+                            <input name="first_name" type="text" id="first_name" [(ngModel)]="tribute.first_name" placeholder="First Name" #first_name="ngModel"
+                              required>
+                            <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)">
+                              <p class="error-block" *ngIf="first_name.errors.required">Please enter first name</p>
+                            </div>
+                          </div>
+
+
+                        </div>
+                        <div>
+                          <label for="middle_name">Middle Name</label>
+                          <input name="middle_name" type="text" id="middle_name" [(ngModel)]="tribute.middle_name" placeholder="Middle Name" #middle_name="ngModel">
+                        </div>
+                        <div>
+                          <label for="last_name">Last Name
+                            <span class="required_field">*</span>
+                          </label>
+                          <input name="last_name" type="text" id="last_name" [(ngModel)]="tribute.last_name" placeholder="Last Name" #last_name="ngModel"
+                            required>
+                          <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+                            <p class="error-block" *ngIf="last_name.errors.required">Please enter last name</p>
+                          </div>
+                        </div>
+                        <div class="width-half l">
+                          <div class="date-fields">
+                            <label for="dob">DOB
+                              <span class="required_field">*</span>
+                            </label>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <input class="form-control" placeholder="YYYY-MM-DD" id="dob" name="dob" [(ngModel)]="userDob" placement="top" ngbDatepicker
+                                  #dob="ngbDatepicker" required>
+                                <button class="input-group-addon" (click)="dob.toggle()" type="button">
+                                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </button>
+
+                                <div *ngIf="(dob.dirty || dob.touched)">f
+                                  <p class="error-block" *ngIf="dob.errors.required">Please select dob</p>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="width-half r">
+                          <div class="date-fields">
+                            <label for="passedOn-date">PassedOn Date
+                              <span class="required_field">*</span>
+                            </label>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <input class="form-control" placeholder="YYYY-MM-DD" name="pod" [(ngModel)]="userPod" placement="top" ngbDatepicker #pod="ngbDatepicker"
+                                  required>
+                                <button class="input-group-addon" (click)="pod.toggle()" type="button">
+                                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="text-center">
+                          <button type="submit" class="button-sml" id="profile-button" [disabled]="!profileFrm.valid">Next</button>
+                        </div>
+
+                      </div>
+
+
+
+                    </div>
+                    <div class="col-md-4">
+                      <div class="box-inner clearfix">
+                        <p>You can save your tribute by clicking the save draft button at any time.</p>
+                        <a class="button-sml r" style="cursor: pointer ">Save Draft</a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane" [ngClass]="{active: currentTab==='biography'}" id="step-2" style="border:0">
+                <form name="biographyFrm" id="biographyFrm" method="post" novalidate (ngSubmit)="onBiographyUpdate(biographyFrm)" #biographyFrm="ngForm">
+                  <div class="media-section">
+                    <div class="box-inner">
+                      <label for="bio" class="heading">
+                        <i class="fa fa-pencil"></i>Biography
+                        <span class="required_field">*</span>
+                      </label>
+                      <textarea cols="30" rows="8" name="biography" type="text" id="biography" [(ngModel)]="tribute.biography" placeholder="Biography"
+                        #biography="ngModel" required></textarea>
+                      <div *ngIf="biography.invalid && (biography.dirty || biography.touched)">
+                        <p class="error-block" *ngIf="biography.errors.required">Please enter biography</p>
+                      </div>
+
+                      <!--<span class="error ng-hide" >Enter autobiography!</span>-->
+                      <p class="characters">32000 characters remaining</p>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="box-inner select-container clearfix">
+                    <div>
+                      <label for="country">Country
+                        <span class="required_field">*</span>
+                      </label>
+
+                      <select class="drop-down form-control" name="country_id" [(ngModel)]="country_id" (ngModelChange)="onChangeCountry($event)"
+                        required>
+                        <option label="Select Country" [ngValue]="0">-Select Country-</option>
+                        <option *ngFor="let list of countryList" [ngValue]="list.id"> {{list.name}}</option>
+                      </select>
+
+
+
+                      <!--  <span class="error ng-hide">Select Country!</span>-->
+                    </div>
+                    <div>
+                      <label for="city">State
+                        <span class="required_field">*</span>
+                      </label>
+                      <select class="drop-down form-control" name="state_id" [(ngModel)]="state_id" (ngModelChange)="onChangeState($event)">
+                        <option label="Select State" [ngValue]="0">-Select State-</option>
+                        <option *ngFor="let list of stateList" [ngValue]="list.id"> {{list.name}}</option>
+                      </select>
+                      <!-- <span class="error ng-hide">Select State!</span> -->
+                    </div>
+                    <div>
+                      <label for="suburb">City
+                        <span class="required_field">*</span>
+                      </label>
+                      <select class="drop-down form-control" name="suburb_id" [(ngModel)]="suburb_id">
+                        <option label="Select City" [ngValue]="0">-Select City-</option>
+                        <option *ngFor="let list of suburbList" [ngValue]="list.id"> {{list.name}}</option>
+                      </select>
+                      <!-- <span class="error ng-hide">Select City!</span> -->
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="text-center">
+                    <button type="submit" class="button-sml" id="biography-button" [disabled]="!biographyFrm.valid">Next</button>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane" [ngClass]="{active: currentTab==='profile_image'}" id="step-3" style="border:0">
+                <div class="box-inner dashed-brd">
+                  <label class="heading">
+                    <i class="fa fa-user"></i>Profile Image</label>
+                  <div class="upload width-two-thirds">
+                    <!-- <div class="dropzone" file="image">
+                      <p>Drag and Drop Your Images Here</p>
+                      <p>or</p>
+                    </div> -->
+                    <input style="display:none;" class="custom-file-upload" id="custom-inputval" type="file" (change)="fileChangeListener($event)">
+                    <div class="image-container">
+                      <!-- <img src="./assets/img/404bg2.jpg" width="100px" height="100px" class="img-responsive">  -->
+                      <div *ngIf="showProfileImage">
+                        <img *ngIf="tribute.base_cover_photo" src="{{tribute.base_cover_photo}}" class="img-responsive" style="display: inline; max-width: 200px;">
+                        <img *ngIf="!tribute.base_cover_photo" src="./assets/img/404bg2.jpg" class="img-responsive" style="display: inline; max-width: 200px;">
+                      </div>
+                      <div *ngIf="!showProfileImage">
+                        <img *ngIf="dataProfileImage.image" [src]="dataProfileImage.image" class="img-responsive" style="display: inline; max-width: 200px;">
+                      </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                      <label for="custom-inputval">
+                        <a class="button-sml" type="">Browse File</a>
+                      </label>
+                    </div>
+
+                    <div style="width:100%; text-align:center;" *ngIf="!showProfileImage">
+                      <img-cropper #cropper [image]="dataProfileImage" [settings]="cropperSettings"></img-cropper>
+                      <br>
+                    </div>
+                    <a class="button-sml" *ngIf="!showProfileImage" (click)="updateProfileImage();" id="profile-image-button">Upload</a>
+                  </div>
+                </div>
+                <!-- <span class="error ng-hide">Select profile image</span>-->
+                <div class="clearfix"></div>
+                <div class="text-center">
+                  <button class="button-sml" (click)="onTabChange('media');">Next</button>
+                </div>
+              </div>
+              <div class="tab-pane" [ngClass]="{active: currentTab==='media'}" id="step-4" style="border:0">
+                <div class="media-section box-inner">
+                  <h2 class="heading">Add Media</h2>
+                  <div class="media-links">
+                    <ul>
+                      <li>
+                        <a class="button-sml " [ngClass]="{current: currentMediaTab==='image'}" (click)="currentMediaTab='image'">Images</a>
+                      </li>
+                      <li>
+                        <a class="button-sml" [ngClass]="{current: currentMediaTab==='video'}" (click)="currentMediaTab='video'">Videos</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="add-media media-type-image" [ngClass]="{active: currentMediaTab==='image'}" >
+                    <div class="add-media-heading">
+                      <h3>
+                        <i class="fa fa-picture-o"></i>Images</h3>
+                    </div>
+                    <div class="cls_media_form">
+                      <div>
+                        <div class="hero is-fullheight">
+                          <div class="hero-body">
+                            <div class="container">
+                              <div class="columns is-multiline">
+                                <div class="column is-8 is-offset-2">
+                                  <div class="drop-container" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+                                    [uploader]="uploaderMediaImage">
+                                    <p>
+                                      Drag a file here or
+                                      <label class="upload-button">
+                                        <input type="file" ng2FileSelect [uploader]="uploaderMediaImage" multiple> browse
+                                      </label>
+                                      to upload.
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="column is-8 is-offset-2">
+                                  <div class="upload-items">
+
+                                    <!-- <div class="outer-gallery-box">
+                                            <div *ngFor="let item of uploaderMediaImage.queue" class="gallery-box l">
+                                            
+                                                <span class="title" ></span>
+                                                <div *ngIf="uploaderMediaImage.options.isHTML5">
+    
+                                                </div>
+                                                <div class="progress progress-striped" *ngIf="uploaderMediaImage.options.isHTML5">
+    
+                                                    <div class="progress" style="margin-bottom: 0;">
+                                                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger btn-xs" ng-click="removeLocalImage(item)">
+                                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+    
+                                        </div> -->
+
+
+                                    <table class="table" *ngIf="uploaderMediaImage?.queue?.length>0">
+                                      <thead>
+                                        <tr>
+                                          <th width="50%">Name</th>
+                                          <th>Size</th>
+                                          <th>Progress</th>
+                                          <th>Status</th>
+                                          <th>Actions</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let item of uploaderMediaImage.queue">
+                                          <td>
+                                            <strong>{{ item?.file?.name }}</strong>
+                                          </td>
+                                          <td *ngIf="uploaderMediaImage.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                                          <td *ngIf="uploaderMediaImage.options.isHTML5">
+                                            <div class="progress" style="margin-bottom: 0;">
+                                              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                            </div>
+                                          </td>
+                                          <td class="text-center">
+                                            <span *ngIf="item.isSuccess">
+                                              <i class="glyphicon glyphicon-ok"></i>
+                                            </span>
+                                            <span *ngIf="item.isCancel">
+                                              <i class="glyphicon glyphicon-ban-circle"></i>
+                                            </span>
+                                            <span *ngIf="item.isError">
+                                              <i class="glyphicon glyphicon-remove"></i>
+                                            </span>
+                                          </td>
+                                          <td nowrap>
+                                            <button type="button" class="btn btn-success btn-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                              <span class="glyphicon glyphicon-upload"></span> Upload
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()" [disabled]="!item.isUploading">
+                                              <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                                              <span class="glyphicon glyphicon-trash"></span> Remove
+                                            </button>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+
+
+
+
+                      <div *ngIf="uploaderMediaImage?.queue?.length>0">
+
+
+                        <button type="button" class="btn btn-success btn-s" (click)="uploaderMediaImage.uploadAll()" [disabled]="!uploaderMediaImage.getNotUploadedItems().length">
+                          <span class="fa fa-upload"></span> Upload all </button>
+                        &nbsp;
+                        <button type="button" class="btn btn-danger btn-s" (click)="uploaderMediaImage.clearQueue()" [disabled]="!uploaderMediaImage.queue.length">
+                          <span class="fa fa-trash"></span> Remove all </button>
+                      </div>
+
+                      <div *ngFor="let tribute_media of tribute.media; let i=index">
+                        <div class="gallery-box l" *ngIf="tribute_media.type == 'IMAGE'">
+                          <div class="thumbnail" style="padding: 10px;">
+                            <!-- <img  style="max-width: 160px;" src="{{tribute_media.media}}" /> -->
+                            <img style="max-width: 160px;" src="https://cdn-prod-tributes.passedon.com/passedon/1510548894985index.jpg" />
+                          </div>
+                          <div class="btn-group">
+                            <button class="btn btn-xs btn-danger" (click)="removeMediaFile(tribute_media, i)">
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                  </div>
+
+                  <div class="add-media media-type-video" [ngClass]="{active: currentMediaTab==='video'}" >
+                    <div class="add-media-heading">
+                      <h3>
+                        <i class="fa fa-file-video-o"></i>Video</h3>
+                    </div>
+                    <div class="cls_media_form">
+                      <div>
+                        <div class="hero is-fullheight">
+                          <div class="hero-body">
+                            <div class="container">
+                              <div class="columns is-multiline">
+                                <div class="column is-8 is-offset-2">
+                                  <div class="drop-container" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+                                    [uploader]="uploaderMediaVideo">
+                                    <p>
+                                      Drag a file here or
+                                      <label class="upload-button">
+                                        <input type="file" ng2FileSelect [uploader]="uploaderMediaVideo" multiple> browse
+                                      </label>
+                                      to upload video(mp4).
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="column is-8 is-offset-2">
+                                  <div class="upload-items">
+
+                                    
+
+
+                                    <table class="table" *ngIf="uploaderMediaVideo?.queue?.length>0">
+                                      <thead>
+                                        <tr>
+                                          <th width="50%">Name</th>
+                                          <th>Size</th>
+                                          <th>Progress</th>
+                                          <th>Status</th>
+                                          <th>Actions</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let item of uploaderMediaVideo.queue">
+                                          <td>
+                                            <strong>{{ item?.file?.name }}</strong>
+                                          </td>
+                                          <td *ngIf="uploaderMediaVideo.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                                          <td *ngIf="uploaderMediaVideo.options.isHTML5">
+                                            <div class="progress" style="margin-bottom: 0;">
+                                              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                            </div>
+                                          </td>
+                                          <td class="text-center">
+                                            <span *ngIf="item.isSuccess">
+                                              <i class="glyphicon glyphicon-ok"></i>
+                                            </span>
+                                            <span *ngIf="item.isCancel">
+                                              <i class="glyphicon glyphicon-ban-circle"></i>
+                                            </span>
+                                            <span *ngIf="item.isError">
+                                              <i class="glyphicon glyphicon-remove"></i>
+                                            </span>
+                                          </td>
+                                          <td nowrap>
+                                            <button type="button" class="btn btn-success btn-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                              <span class="glyphicon glyphicon-upload"></span> Upload
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()" [disabled]="!item.isUploading">
+                                              <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                                              <span class="glyphicon glyphicon-trash"></span> Remove
+                                            </button>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+
+
+
+
+                      <div *ngIf="uploaderMediaVideo?.queue?.length>0">
+
+
+                        <button type="button" class="btn btn-success btn-s" (click)="uploaderMediaVideo.uploadAll()" [disabled]="!uploaderMediaVideo.getNotUploadedItems().length">
+                          <span class="fa fa-upload"></span> Upload all </button>
+                        &nbsp;
+                        <button type="button" class="btn btn-danger btn-s" (click)="uploaderMediaVideo.clearQueue()" [disabled]="!uploaderMediaVideo.queue.length">
+                          <span class="fa fa-trash"></span> Remove all </button>
+                      </div>
+
+                      <div *ngFor="let tribute_media of tribute.media; let i=index">
+                        <div class="gallery-box l" *ngIf="tribute_media.type == 'VIDEO'">
+                          <div class="thumbnail" style="padding: 10px;">
+                            <!-- <img  style="max-width: 160px;" src="{{tribute_media.media}}" /> -->
+                            <img style="max-width: 160px;" src="./assets/img/video-placeholder.jpg" />
+                          </div>
+                          <div class="btn-group">
+                            <button class="btn btn-xs btn-danger" (click)="removeMediaFile(tribute_media, i)">
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                  </div>
+
+
+                  <div class="clearfix"></div>
+                  <div class="text-center">
+                    <button class="button-sml " style="margin-top:10px;" (click)="onTabChange('themes');">Next</button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="tab-pane" [ngClass]="{active: currentTab==='themes'}" id="step-5" style="border:0">
+                <div class="theme-selection box-inner clearfix">
+                  <h2 class="heading">Select your theme</h2>
+                  <div class="available-themes clearfix">
+                    <div class="image-container l width-quarter">
+                      <img src="./assets/img/theme-one-thumb.jpg" class="scale" alt=""> </div>
+                    <div class="l width-three-quarters">
+                      <h3>Default Theme</h3>
+                      <div class="action-links">
+                        <div>
+                          <a href="javascript:void(0);" id="theme-1" class="button-sml" (click)="activateTheme(1);">Activate</a>
+                          <i *ngIf="tribute.theme_id==1" class="fa fa-check-square"></i>
+                        </div>
+                        <div>
+                          <a href="javascript:void(0);" class="button-sml top">Preview</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p></p>
+                  <div class="available-themes clearfix">
+                    <div class="image-container l width-quarter">
+                      <img src="./assets/img/theme-two-thumb.jpg" class="scale" alt=""> </div>
+                    <div class="l width-three-quarters">
+                      <h3>Theme two</h3>
+                      <div class="action-links">
+                        <div>
+                          <a href="javascript:void(0);" id="theme-2" class="button-sml" (click)="activateTheme(2);">Activate</a>
+                          <i *ngIf="tribute.theme_id==2" class="fa fa-check-square"></i>
+                        </div>
+                        <div>
+                          <a href="javascript:void(0);" class="button-sml top">Preview</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="text-center">
+                  <button type="submit" class="button-sml" (click)="onTabChange('publish');">Next</button>
+                </div>
+              </div>
+
+              <!-- <div class="tab-pane" [ngClass]="{active: currentTab==='contacts'}" id="step-6" style="border:0">
+                <div class="add-contacts box-inner clearfix">
+                  <h2 class="heading">Select Contacts</h2>
+                  <p class="title-popup">Tell your friends about your new tribute page
+                    <button type="button" class="button-sml r" value="Import Contacts">Import Contacts</button>
+                  </p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="search-container">
+                        <form class="navbar-form" role="search">
+                          <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="q">
+                            <div class="input-group-btn">
+                              <button class="btn btn-default" type="submit">
+                                <i class="fa fa-search"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <ul class="contact-list-results">
+                        <li class="clearfix">
+                          <div class="l">
+                            <img src="./assets/img/profile-placeholder.jpg" alt="" width="39" height="39" />
+                            <label>Kevin Smith</label>
+                          </div>
+                          <div class="r">
+                            <input name="contact-group" id="checkBoxId" type="checkbox" />
+
+                          </div>
+                        </li>
+                        <li class="clearfix">
+                          <div class="l">
+                            <img src="./assets/img/profile-placeholder.jpg" alt="" width="39" height="39" />
+                            <label>Kevin Smith</label>
+                          </div>
+                          <div class="r">
+                            <input name="contact-group" id="checkBoxId" type="checkbox">
+
+                          </div>
+                        </li>
+                        <li class="clearfix">
+                          <div class="l">
+                            <img src="./assets/img/profile-placeholder.jpg" alt="" width="39" height="39" />
+                            <label>Kevin Smith</label>
+                          </div>
+                          <div class="r">
+                            <input name="contact-group" id="checkBoxId" type="checkbox">
+
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6">
+                      <form name="" method="post">
+                        <button type="button" class="button-sml r" value="Add Contacts Manually" style="margin-top:10px;">Add Contacts Manually</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="text-center">
+                  <button type="submit" class="button-sml" (click)="onTabChange('publish');">Next</button>
+                </div>
+              </div> -->
+
+              <div class="tab-pane" [ngClass]="{active: currentTab==='publish'}" id="step-7" style="border:0">
+                <div align="center">
+                  <a href="javascript:void(0);" class="payment clearfix" style="float:none;">
+                    <i class="fa fa-heart" style="font-size:35px;"></i>
+                    <span class="header">Lets Publish Your Tribute</span>
+                  </a>
+                </div>
+                <div class="clearfix"></div>
+                <div class="text-center">
+                  <a class="margin-10 button-sml" [routerLink]="['/tribute/view']">Publish Later</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

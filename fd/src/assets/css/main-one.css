@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+@import url('http://fonts.googleapis.com/css?family=Signika:400,300,600|Open+Sans:400,300,600');
+
+@import "bootstrap.min.css";
+@import "font-awesome.min.css";
+@import "main-tribute.css";
+
+/*@import "tribute-1.css";
+@import "tribute-2.css";
+*/
+
+
