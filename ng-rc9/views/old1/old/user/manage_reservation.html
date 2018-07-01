@@ -1,0 +1,122 @@
+
+<!--header start-->
+<main-header></main-header>
+<!--header end-->
+<style type="text/css">
+    footer {
+        position: absolute;
+    }
+
+    section {
+        min-height: 840px;
+    }
+
+</style>
+<section id="reservation" ng-controller="manageReservationCtrl" ng-init="initReservation();">
+    <div class="container">
+        <div class="">
+            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-9 bhoechie-tab-container">
+                <div class="col-md-2 col-sm-3 bhoechie-tab-menu">
+                    <div class="list-group"> 
+                        <a ui-sref="dashboard" class="list-group-item  text-center">
+                            <h4 class="fa fa-dashboard"></h4>
+                            <br/>
+                            Dashboard 
+                        </a> 
+                        <a ui-sref="#" atag class="list-group-item active text-center">
+                            <h4 class="fa fa-edit"></h4>
+                            <br/>
+                            Reservations </a> 
+                        <!--                        <a href="javascript:void(0);" atag class="list-group-item text-center">
+                                                    <h4 class="fa fa-user"></h4>
+                                                    <br/>
+                                                    Profile 
+                                                </a> 
+                                                <a href="#" atag class="list-group-item text-center">
+                                                    <h4 class="fa fa-users"></h4>
+                                                    <br/>
+                                                    Account 
+                                                </a> 
+                                                <a href="#" atag class="list-group-item text-center">
+                                                    <h4 class="fa fa-thumbs-up"></h4>
+                                                    <br/>
+                                                    Points & Rewards 
+                                                </a> -->
+                    </div>
+                </div>
+                <div class="col-md-10 col-sm-9 bhoechie-tab"> 
+                    <!-- flight section -->
+                    <div class="bhoechie-tab-content active">
+                        <h1 class="h1">Reservations Made</h1>
+                        <h2 class="h2">Information</h2>
+                        <div class="col-md-6 col-sm-6"></div>
+                        <div class="col-md-6 col-sm-6">
+                            <div id="custom-search-input">
+                                <div class="input-group col-md-12">
+                                    <input type="text" class="  search-query form-control" ng-model="search_query" placeholder="Search" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="button"> <span class="glyphicon glyphicon-search"></span> </button>
+                                    </span> </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="table-responsive">
+
+
+                            <table width="100%" border="0">
+                                <tr>
+                                    <th style="width: 25%">Booking ID</th>
+                                    <th style="width: 25%">Pickup Date</th>
+                                    <th style="width: 25%">Dropoff Date</th>
+                                    <th style="width: 25%">Seller Name</th>
+                                </tr>
+                                <tr ng-repeat="(key,val) in reservationList |filter:search_query">
+                                    <td>{{val.trip_id}}</td>
+                                    <td>{{val.pickup_date}}</td>
+                                    <td>{{val.dropoff_date}}</td>
+                                    <td>{{val.seller_name}}</td>
+                                </tr>
+
+                                <tr ng-if="(reservationList |filter:search_query).length == 0">
+                                    <td colspan="4">No Records found.</td>
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <p class="tops">&nbsp;</p>
+                            </div>
+                        </div>
+
+
+                        <!--                        <div class="row">
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <p class="tops">Showing 0 to 0 of 0 entries</p>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <ul class="pager">
+                                                            <li><a href="#">First</a></li>
+                                                            <li ><a href="#">Previous</a></li>
+                                                            <li><a href="#">Next</a></li>
+                                                            <li><a href="#">Last</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>-->
+                    </div>
+                    <!-- train section -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!--footer start-->
+<main-footer-book></main-footer-book>
+<!--footer end-->

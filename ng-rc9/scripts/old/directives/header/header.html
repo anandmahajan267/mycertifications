@@ -1,0 +1,42 @@
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="">
+                <div class="navbar-header col-md-8"> 
+                    <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>--> 
+                    <a class="navbar-brand" ui-sref="home"><img src="assets/img/logo.png" alt="" class="site-logo" /></a> 
+                    <span class="padTop"> 
+                        <span class="blackTras" >Compare prices from small, medium sized and large car rental companies all in one.</span>
+                    </span> 
+                </div>    
+            </div>
+            <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle mobile-menu-toggle-button">
+            <ul id="plain-menu" class="mobile-toggleable-menu mobile-left">
+
+                <li ng-if="(!currentUser.id)"> 
+                    <a href="#" atag ng-click="showLogin();">
+                        <i class="fa fa-sign-in"></i>&nbsp; Log In
+                    </a> 
+                </li>
+                <li class="none" ng-if="(!currentUser.id)"> 
+                    <a href="#" atag ng-click="showSignUp();">
+                        <i class="fa fa-pencil-square-o"></i>&nbsp; Sign Up
+                    </a> 
+                </li>
+
+                <li ng-if="(currentUser.id)"> 
+                    <a ui-sref="manage_reservation">
+                        <i class="fa fa-user"></i>&nbsp; Reservation
+                    </a> 
+                </li>
+                <li class="none" ng-if="(currentUser.id)"> 
+                    <a href="#" atag ng-click="doLogout();">
+                        <i class="fa fa-pencil-square-o"></i>&nbsp; Logout
+                    </a> 
+                </li>
+            </ul>
+            <label class="mobile-left mobmenu-toggle" for="mobile-menu-toggle">+</label>
+        </div>
+    </nav>
+</header>
+

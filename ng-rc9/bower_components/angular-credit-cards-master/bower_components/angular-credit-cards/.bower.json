@@ -1,0 +1,44 @@
+{
+  "name": "angular-credit-cards",
+  "homepage": "https://github.com/bendrucker/angular-credit-cards",
+  "authors": [
+    "Ben Drucker <bvdrucker@gmail.com>"
+  ],
+  "description": "Angular directives for formatting and validating credit card inputs",
+  "main": "./release/angular-credit-cards.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "angular",
+    "credit",
+    "card",
+    "payments",
+    "validation",
+    "directive",
+    "form"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": ">=1.3 <1.6"
+  },
+  "version": "2.4.3",
+  "_release": "2.4.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.4.3",
+    "commit": "ab8dee507eda24336bddde0e306830461a8928ab"
+  },
+  "_source": "git://github.com/bendrucker/angular-credit-cards.git",
+  "_target": "^2.4.3",
+  "_originalSource": "angular-credit-cards",
+  "_direct": true
+}

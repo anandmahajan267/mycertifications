@@ -1,0 +1,241 @@
+
+<!--header start-->
+<main-header></main-header>
+<style type="text/css">
+    footer {
+        position: absolute;
+    }
+
+    section#searchForm {
+        min-height: 840px;
+    }
+
+</style>
+<!--header end-->
+<script type="text/ng-template" id="itemLocationTpl.html">
+    <div class="typeahead-group-header cls_location_header" style="padding:1px 0 1px 10px;" ng-if="match.model.isParent">
+    <i ng-class="'fa '+match.model.flag_url"></i>
+    {{match.model.name}}
+    </div>
+    <a href="javascript:void(0);" tabindex="-1" ng-if="!match.model.isParent">
+    <img src="{{match.model.flag_url}}" style="width:16px;">
+    <span ng-bind-html-unsafe="match.model">{{match.model.name}}</span>
+    </a>
+</script>
+
+
+<section id="searchForm" ng-controller="homeCtrl" ng-init="initHome();">
+    <div class="container">
+
+
+        <div class="row">
+            <div class="black-bg">
+                <div class="col-md-5 col-sm-6 padNone">
+                    <div class="searchBox">
+                        <h1 class="h1">Search for rental cars</h1>
+
+
+
+                        <form id="carHomeFrm" name="carHomeFrm" novalidate="novalidate" data-ng-submit="doSearch(carHomeFrm.$valid)">
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <div class="input-group cls_auto_location_parent"> 
+                                            <span class="input-group-addon">Pick Up</span>
+
+                                            <input type="text" class="form-control" name="pick_up_loc"  placeholder="Type in city or airport name" ng-model="searchObj.pick_up_loc" 
+                                                   typeahead="a.name for a in getLocations($viewValue,'pick_up_loc') | filter:$viewValue| limitTo:10" 
+                                                   typeahead-on-select="callBackLocation($item,$label,'pick_up_loc'); " typeahead-template-url="itemLocationTpl.html" 
+                                                   typeahead-wait-ms='800' typeahead-min-length='3' typeahead-loading="loading" 
+                                                   ng-blur="onBlueCallBack('pick_up_loc');" ng-change="onChangeLocation('pick_up_loc');" required autocomplete="off">
+
+
+                                        </div>
+                                        <div ng-class="{ 'has-error' : carHomeFrm.pick_up_loc.$invalid && carHomeFrm.pick_up_loc.$dirty }">
+                                            <p ng-show="carHomeFrm.pick_up_loc.$error.required && carHomeFrm.pick_up_loc.$dirty" class="cls_input_error_2">
+                                                Please select pick up location.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 padNone">
+                                    <div class="form-group marBtm">
+                                        <div class="input-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" ng-model="searchObj.show_drop_off" >
+                                                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>Different drop off location? </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 padNone">
+                                    <div class="form-group marBtm">
+                                        <div class="input-group">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" ng-model="searchObj.show_driver_age">
+                                                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>Driver aged between 25-70 </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="searchObj.show_drop_off">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <div class="input-group cls_auto_location_parent"> 
+                                            <span class="input-group-addon">Drop Off</span>
+
+                                            <input type="text" class="form-control" name="drop_off_loc" placeholder="Type in city or airport name" ng-model="searchObj.drop_off_loc" 
+                                                   typeahead="a.name for a in getLocations($viewValue,'drop_off_loc') | filter:$viewValue| limitTo:10" 
+                                                   typeahead-on-select="callBackLocation($item,$label,'drop_off_loc')" typeahead-template-url="itemLocationTpl.html" 
+                                                   typeahead-wait-ms='800' typeahead-min-length='3' typeahead-loading="loading" 
+                                                   ng-blur="onBlueCallBack('drop_off_loc');" ng-change="onChangeLocation('drop_off_loc');" required autocomplete="off">
+                                        </div>
+                                        <div ng-class="{ 'has-error' : carHomeFrm.drop_off_loc.$invalid && carHomeFrm.drop_off_loc.$dirty }">
+                                            <p ng-show="carHomeFrm.drop_off_loc.$error.required && carHomeFrm.drop_off_loc.$dirty" class="cls_input_error_2">
+                                                Please select drop off location.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-hide="searchObj.show_driver_age">
+                                <div class="col-sm-2 col-md-3">
+                                    <label>Driver Age</label>
+                                </div>
+                                <div class="col-sm-10 col-md-9 padLft">
+                                    <div class="form-group">
+                                        <input type="number" required name="driver_age" class="form-control"  placeholder="Driver Age" 
+                                               ng-model="searchObj.driver_age" min="18">
+
+                                        <div ng-class="{ 'has-error' : carHomeFrm.driver_age.$invalid && carHomeFrm.driver_age.$dirty }">
+                                            <p ng-show="carHomeFrm.driver_age.$error.required && carHomeFrm.driver_age.$dirty" class="cls_input_error_2">
+                                                Please enter a valid driver's age (18 or over)
+                                            </p>
+                                            <p ng-show="carHomeFrm.driver_age.$error.min && carHomeFrm.driver_age.$dirty" class="cls_input_error_2">
+                                                Please enter a valid driver's age (18 or over)
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2 col-md-3">
+                                    <label>Pick Up</label>
+                                </div>
+                                <div class="col-sm-6 col-md-5 padLft">
+                                    <div class="form-group cls_date_picker">
+                                        <!--                                        <input type="text" name="pick_up_date" class="form-control" min-date="searchObj.drop_off_date" placeholder="Pick Up" datepicker-popup="{{format}}" 
+                                                                                       ng-click="openCalenderDate($event, 'opened_2')" ng-model="searchObj.pick_up_date" 
+                                                                                       is-open="calenderDateObj.opened_2" datepicker-options="dateOptions"  show-button-bar="false" required />-->
+                                        <input type="text" class="form-control" start-date-calendar=""  
+                                               name="pick_up_date" id="pick_up_date" 
+                                               ng-model="searchObj.pick_up_date" placeholder="Pick Up" required autocomplete="off" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-4 padLft">
+                                    <div class="form-group">
+                                        <!--                                        <input class="form-control" size="8" data-time-format="h:mm a" data-autoclose="1" ng-model="searchObj.pick_up_time" name="time" bs-timepicker 
+                                                                                       data-minute-step="30" data-arrow-behavior="picker" data-length="3" type="text">-->
+                                        <select
+                                            ng-model="searchObj.pick_up_time" 
+                                            name="pick_up_time" 
+                                            class="form-control" 
+                                            ng-change="onChangeTime('pick_up_time');" 
+                                            ng-options="a.id as a.name for a in timesOptions" required>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2 col-md-3">
+                                    <label>Drop Off</label>
+                                </div>
+                                <div class="col-sm-6 col-md-5 padLft">
+                                    <div class="form-group cls_date_picker">
+
+
+                                        <!--                                        <input type="text" name="drop_off_date" class="form-control" min-date="today" max-date="searchObj.pick_up_date" placeholder="Drop Off" datepicker-popup="{{format}}" 
+                                                                                       ng-click="openCalenderDate($event, 'opened_1')" ng-model="searchObj.drop_off_date" 
+                                                                                       is-open="calenderDateObj.opened_1" datepicker-options="dateOptions"  show-button-bar="false" required />-->
+
+                                        <input type="text" class="form-control" end-date-calendar=""  
+                                               name="drop_off_date" id="drop_off_date" 
+                                               ng-model="searchObj.drop_off_date" placeholder="Drop Off" required autocomplete="off" readonly>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-sm-4 col-md-4 padLft">
+                                    <div class="form-group ">
+                                        <!--                                        <input class="form-control" size="8" data-time-format="h:mm a" data-autoclose="1" ng-model="searchObj.drop_off_time" name="time" bs-timepicker 
+                                                                                       data-minute-step="30" data-arrow-behavior="picker" data-length="3" type="text">-->
+
+                                        <select
+                                            ng-model="searchObj.drop_off_time" 
+                                            name="drop_off_time" 
+                                            class="form-control" 
+                                            ng-options="a.id as a.name for a in timesOptions" required>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row" ng-show="carHomeFrm.$invalid && !isFrmInvalid">
+
+                                <div class="col-sm-12 col-md-12">
+                                    <div ng-class="{ 'has-error' :carHomeFrm.$invalid }">
+                                        <p class="cls_input_error_2">
+                                            Please fill in all the fields
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 25px;">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group cls_custom_btn">
+                                        <button type="submit" class="btn  btn-default">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-6 spaceRht">
+                    <div class="logoSection">
+                        <h1 class="h1">Best prices guaranteed</h1>
+                        <h2 class="h2">Search, Compare and Book Budget Car Rentals</h2>
+                        <div > <span><img src="assets/img/logo/hertz.jpg" alt="Hertz" /></span> <span><img src="assets/img/logo/europcar.jpg" alt="Europcar" /></span> <span><img src="assets/img/logo/thrifty.jpg" alt="Thrifty" /></span> <span><img src="assets/img/logo/avis.jpg" alt="Avis" /></span> </div>
+                        <div class="clearfix">&nbsp;</div>
+                        <div> <span><img src="assets/img/logo/eazi-car.jpg" alt="Eazi Car" /></span> <span><img src="assets/img/logo/ace-drive.jpg" alt="Ace Drive" /></span> <span><img src="assets/img/logo/aka.jpg" alt="AKA" /></span> <span><img src="assets/img/logo/sixt.jpg" alt="Sixt" /></span> </div>
+                        <div class="clearfix">&nbsp;</div>
+                        <div> <span><img src="assets/img/logo/auto-boutique.jpg" alt="Auto Boutique" /></span> <span><img src="assets/img/logo/atlantic.jpg" alt="Atlantic" /></span> <span><img src="assets/img/logo/limo-cars.jpg" alt="Limo Cars" /></span> <span><img src="assets/img/logo/wedding-cars.jpg" alt="Wedding Cars" /></span> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    <ng-include src="'views/login_popup.html'"></ng-include>-->
+    <login-modal-view></login-modal-view>
+    <signup-modal-view></signup-modal-view>
+
+</section>
+
+<!--footer start-->
+<main-footer-book></main-footer-book>
+<!--footer end-->

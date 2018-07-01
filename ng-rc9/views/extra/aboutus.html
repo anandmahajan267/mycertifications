@@ -1,0 +1,40 @@
+
+<!--header start-->
+<main-header></main-header>
+<!--header end-->
+
+
+<section id="topspacing" ng-controller="aboutusCtrl" ng-init="initData();">
+    <div class="container">
+        <div class="col-md-12 padNone">
+            <h1 class="h1" style="border-bottom:1px solid #eee; padding-bottom:10px;" >{{aboutusObj.title}}</h1>
+        </div>
+        <div class="col-md-8 col-md-offset-2 padNone">
+            <p >{{aboutusObj.pera1}}</p>
+            <p >{{aboutusObj.pera2}}</p>
+            <div class="quoteItem"> 
+                <span class="center quote1" >{{aboutusObj.quote1}}</span><br>
+                <span class="center quote2" >{{aboutusObj.quote2}}</span> <br>
+                <span class="center " >{{aboutusObj.quote3}}</span> </div>
+            <div class="image" align="center">
+                <div class="ccontentText">
+                    <center>
+                        <h4 >{{aboutusObj.text1}}</h4>
+                    </center>
+                    <h2 >{{aboutusObj.text2}}</h2>
+                    <center>
+                        <h4 >{{aboutusObj.text3}}</h4>
+                    </center>
+                </div>
+                <img alt="" src="assets/img/registeredcars.jpg"> </div>
+        </div>
+    </div>
+
+</section>
+
+<login-modal-view></login-modal-view>
+<signup-modal-view></signup-modal-view>
+<!--footer start-->
+<main-footer-book></main-footer-book>
+<!--footer end-->
+<toaster-container></toaster-container>

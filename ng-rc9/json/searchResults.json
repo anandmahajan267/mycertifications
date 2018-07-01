@@ -1,0 +1,77 @@
+[
+  {
+    "start_date": "2016-02-26 14:34:19",
+    "end_date": "2016-02-28 14:34:19",
+    "filter_car_spec": [
+        {
+          "name": "Air Conditioning (15)"
+        },
+        {
+          "name": "Petrol (13)"
+        }
+    ],
+    "filter_car_supplier": [
+        {
+          "name": "Avis (18)"
+        },
+        {
+          "name": "Europcar (13)"
+        }
+    ],
+    "cars": [
+      {
+        "id": 397,
+        "seaters": 5,
+        "cc": 1600,
+        "aircon": 1,
+        "transmission": "A/T",
+        "self_drive": 1,
+        "original_price": 300.00,
+        "selling_price": 287.78,
+        "bookingType": "free_sale",
+        "thumbnail": "thumbnails/Igua Chevrolet Aveo (M).jpg",
+        "image_alt": "Booking Vehicle Leasing SG Igua Chevrolet Aveo (M)",
+        "avg_rate": 4.5,
+        "make": "Chevrolet Aveo",
+        "include_free": ["Cancellation","Theft Protection"],
+        "supplier_info":[
+          {
+            "Pick-up": "Shuttle Bus",
+            "Fuel policy": "Full to Full"
+          }
+        ],
+        "company_name": "Europcar",
+        "company_img": "Europcar.jpg",
+        "type": "Economy",
+        "tag": "Best Seller"
+      },
+      {
+        "id": 398,
+        "seaters": 5,
+        "cc": 1800,
+        "aircon": 1,
+        "transmission": "A/T",
+        "self_drive": 1,
+        "original_price": 343.00,
+        "selling_price": 307.78,
+        "bookingType": "free_sale",
+        "thumbnail": "thumbnails/Hyundai I20.jpg",
+        "image_alt": "Booking Vehicle Leasing SG Hyundai I20",
+        "avg_rate": 3.5,
+        "make": "Chevrolet Aveo",
+        "include_free": ["Cancellation","Theft Protection"],
+        "supplier_info":[
+          {
+            "Pick-up": "Shuttle Bus",
+            "Fuel policy": "Full to Full",
+            "Insurance policy": "Covered"
+          }
+        ],
+        "company_name": "Europcar",
+        "company_img": "Europcar.jpg",
+        "type": "Economy",
+        "tag": "Popular"
+      }
+    ]
+  }
+]

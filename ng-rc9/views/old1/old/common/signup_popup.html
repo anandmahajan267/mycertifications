@@ -1,0 +1,164 @@
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="display: none;">
+    <div class="modal-dialog">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-md-6 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3 class="modal-title">Register to Continue</h3>
+                        </div>
+                        <div class="panel-body"> 
+                            <!-- Form  Here -->
+                            <form id="userSignupFrm" name="userSignupFrm" novalidate="novalidate" data-ng-submit="doValidateSignup(userSignupFrm.$valid);">
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <span class="input-group-addon"> 
+                                                    <i class="glyphicon glyphicon-user"></i> </span>
+                                                <input class="form-control" placeholder="First Name" name="reg_first_name" type="text" 
+                                                       ng-model="userSignupObj.first_name" required />
+                                            </div>
+                                            <div ng-class="{ 'has-error' : userSignupFrm.reg_first_name.$invalid && userSignupFrm.reg_first_name.$dirty }">
+                                                <p ng-show="(userSignupFrm.reg_first_name.$error.required && userSignupFrm.reg_first_name.$dirty) || (!userSignupObj.isFrmInvalid && userSignupFrm.reg_first_name.$error.required)" class="cls_input_error">
+                                                    Please enter first name.
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <span class="input-group-addon"> 
+                                                    <i class="glyphicon glyphicon-user"></i> </span>
+                                                <input class="form-control" placeholder="Last Name" name="reg_last_name" type="text" 
+                                                       ng-model="userSignupObj.last_name" required />
+                                            </div>
+                                            <div ng-class="{ 'has-error' : userSignupFrm.reg_last_name.$invalid && userSignupFrm.reg_last_name.$dirty }">
+                                                <p ng-show="(userSignupFrm.reg_last_name.$error.required && userSignupFrm.reg_last_name.$dirty) || (!userSignupObj.isFrmInvalid && userSignupFrm.reg_last_name.$error.required)" class="cls_input_error">
+                                                    Please enter last name.
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                <input type="email" class="form-control" placeholder="E-Mail" name="reg_email" 
+                                                       ng-model="userSignupObj.email" required />
+                                            </div>
+                                            <div ng-class="{ 'has-error' : userSignupFrm.reg_email.$invalid && userSignupFrm.reg_email.$dirty }">
+                                                <p ng-show="(userSignupFrm.reg_email.$error.required && userSignupFrm.reg_email.$dirty) || (!userSignupObj.isFrmInvalid && userSignupFrm.reg_email.$error.required)" class="cls_input_error">
+                                                    Please enter email.
+                                                </p>
+                                                <p ng-show="userSignupFrm.reg_email.$error.email && userSignupFrm.reg_email.$dirty" class="cls_input_error">
+                                                    Please enter valid email.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <span class="input-group-addon"> <i class="glyphicon glyphicon-phone"></i> </span>
+
+
+                                                <select
+                                                    ng-model="userSignupObj.phoneCode" 
+                                                    name="reg_phoneCode" required 
+                                                    class="form-control" 
+                                                    ng-options="a.value as a.name + '(' + a.dial_code + ')' for a in location_options">
+                                                </select>
+                                            </div>
+                                            <div ng-class="{ 'has-error' : userSignupFrm.reg_phoneCode.$invalid && userSignupFrm.reg_phoneCode.$dirty }">
+                                                <p ng-show="(userSignupFrm.reg_phoneCode.$error.required && userSignupFrm.reg_phoneCode.$dirty) || (!userSignupObj.isFrmInvalid && userSignupFrm.reg_phoneCode.$error.required)" class="cls_input_error">
+                                                    Please enter phone code.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                                <input type="text" class="form-control" placeholder="Phone" name="reg_phone" 
+                                                       ng-model="userSignupObj.phone" required />
+                                            </div>
+                                            <div ng-class="{ 'has-error' : userSignupFrm.reg_phone.$invalid && userSignupFrm.reg_phone.$dirty }">
+                                                <p ng-show="(userSignupFrm.reg_phone.$error.required && userSignupFrm.reg_phone.$dirty) || (!userSignupObj.isFrmInvalid && userSignupFrm.reg_phone.$error.required)" class="cls_input_error">
+                                                    Please enter phone #.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <span class="input-group-addon"> <i class="glyphicon glyphicon-lock"></i> </span>
+                                                <input class="form-control" placeholder="Password" name="reg_password" type="password" 
+                                                       ng-model="userSignupObj.password" required />
+                                            </div>
+                                            <div ng-class="{ 'has-error' : userSignupFrm.reg_password.$invalid && userSignupFrm.reg_password.$dirty }">
+                                                <p ng-show="(userSignupFrm.reg_password.$error.required && userSignupFrm.reg_password.$dirty) || (!userSignupObj.isFrmInvalid && userSignupFrm.reg_password.$error.required)" class="cls_input_error">
+                                                    Please enter password.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <span class="input-group-addon"> <i class="glyphicon glyphicon-lock"></i> </span>
+                                                <input class="form-control" placeholder="Confirm Password" name="reg_confirm_password" type="password" 
+                                                       ng-model="userSignupObj.confirm_password" required />
+                                            </div>
+                                            <div ng-class="{ 'has-error' : userSignupFrm.reg_confirm_password.$invalid && userSignupFrm.reg_confirm_password.$dirty }">
+                                                <p ng-show="(userSignupFrm.reg_confirm_password.$error.required && userSignupFrm.reg_confirm_password.$dirty) || (!userSignupObj.isFrmInvalid && userSignupFrm.reg_confirm_password.$error.required)" class="cls_input_error">
+                                                    Please enter confirm password.
+                                                </p>
+                                                <p ng-show="(userSignupObj.password != userSignupObj.confirm_password) && (!userSignupFrm.reg_confirm_password.$error.required)" class="cls_input_error">
+                                                    Password and confirm password should be same.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div align="center" class="col-md-12 col-sm-12  ">
+                                    <button type="submit" class="btn btn-default bg" ng-show="showActSignupBtn">Register</button>
+                                    <button type="button" class="btn btn-default bg" ng-hide="showActSignupBtn">
+                                        Please Wait <i class="fa fa-spin fa-spinner"></i></button>
+
+                                    <button type="button" class="btnFacebook btn btn-default" 
+                                            ng-show="showActSignupBtn" ng-click="IntentLogin()" >
+                                        <i class="fa fa-facebook"></i> Sign up with Facebook</button>
+                                </div>
+                            </form>
+                            <!-- --> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

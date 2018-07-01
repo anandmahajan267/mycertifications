@@ -1,0 +1,240 @@
+ 
+<!--header start-->
+<main-header></main-header>
+<!--header end-->
+<div class="cls_main_div" ng-controller="carPaymentCtrl" ng-init="initPayment();">
+
+    <div class="cls_search_cars">
+        <section id="searchResults" style="overflow: hidden;">
+            <div class="blueBg">
+                <div class="container">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="tab_bar">
+                            <li ><a ui-sref="book_car">Select Your Car</a></li>
+                            <li ><a ui-sref="book_car_extra" >Extras</a></li>
+                            <li ><a ui-sref="book_car_details">Details</a></li>
+                            <li class="active"><a href="javascript:void(0);" atag>Payment</a></li>
+                            <li><a href="javascript:void(0);" atag>Confirmation</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="container">
+                <div class="tab-content"> 
+                    <!-- Select Your Car -->
+                    <div class="tab-pane active" id="tab4">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <div class="extras">
+                                    <div><img src="assets/img/hyundai-i20.png" alt=""/></div>
+                                    <h1 class="h1">{{selCarObj.make}} <span>{{selCarObj.type}} </span></h1>
+                                    <hr/>
+                                    <div>
+                                        <label class="fnt">Pick-up</label>
+                                    </div>
+                                    <div class="title">{{searchObj.pick_up_loc}}</div>
+                                    <div class="time">{{ searchObj.pick_up_datetime | date : 'EEEE, MMMM dd'}} {{ searchObj.pick_up_datetime | date : '@H:mm'}}</div>
+                                    <!--                                    <div class="address">5309 Mccoy Road<br/>
+                                                                            Orlando, FL 32812</div>-->
+
+                                    <hr/>
+                                    <div>
+                                        <label class="fnt">Drop-off</label>
+                                    </div>
+
+                                    <div class="title" ng-show="(searchObj.show_drop_off)">
+                                        {{searchObj.pick_up_loc}}
+                                    </div>
+
+                                    <div class="title" ng-hide="(searchObj.show_drop_off)">
+                                        {{searchObj.drop_off_loc}}
+                                    </div>
+                                    <div class="time">
+                                        {{ searchObj.drop_off_datetime | date : 'EEEE, MMMM dd'}} {{ searchObj.drop_off_datetime | date : '@H:mm'}}
+                                    </div>
+
+
+
+                                    <hr/>
+                                    <div>
+                                        <label class="fnt">Rental Period</label>
+                                    </div>
+                                    <div class="address">
+                                        <span ng-show="(diffDaysType == 'hour')">{{diffDays}} Hours</span> 
+                                        <span ng-show="(diffDays <= 1 && diffDaysType == 'day')">{{diffDays}} Day</span> 
+                                        <span ng-show="(diffDays > 1 && diffDaysType == 'day')">{{diffDays}} Days</span> 
+                                    </div>
+                                    <div>
+                                        <label class="fnt">Vehicle Features</label>
+                                    </div>
+                                    <div class="space">
+                                        <span>
+                                            <img src="assets/img/car-type/users.png" alt="" class="top"/>
+                                            <label class="whiteBg">{{selCarObj.seaters}}-Seater</label>
+                                        </span> 
+                                        <span ng-show="(selCarObj.aircon == 1)">
+                                            <img src="assets/img/car-type/ac.png" alt="" class="top"/>
+                                            <label class="whiteBg">A/C</label>
+                                        </span> 
+                                        <span>
+                                            <img src="assets/img/car-type/setting.png" alt="" class="top"/>
+                                            <label class="whiteBg">{{selCarObj.transmission}}</label>
+                                        </span> 
+                                        <span>
+                                            <img src="assets/img/car-type/cars.png" alt="" class="top"/>
+                                            <label class="whiteBg">{{selCarObj.cc}} cc</label>
+                                        </span> 
+                                        <span ng-show="(selCarObj.self_drive == 1)">
+                                            <img src="assets/img/car-type/self.png" alt="" class="top"/>
+                                            <label class="whiteBg">Self Drive</label>
+                                        </span> 
+                                    </div>
+                                    <hr/>
+                                    <div ng-show="(selCarObj.min_age > 0)">
+                                        <label class="fnt">Minimum Age of Driver</label>
+                                    </div>
+                                    <div class="address">
+                                        <span ng-show="(selCarObj.min_age > 0)">{{selCarObj.min_age}} years</span> 
+                                        <!--                                        21 years-->
+                                    </div>
+                                    <hr ng-show="(selCarObj.min_age > 0)" />
+                                    <div ng-show="(selCarObj.license_ownership)">
+                                        <label class="fnt">Driver's License Ownership</label>
+                                    </div>
+                                    <div ng-show="(selCarObj.license_ownership)" class="address">
+                                        {{selCarObj.license_ownership}}
+                                        <!--                                        min. 1 year(s)-->
+                                    </div>
+                                    <hr ng-show="(selCarObj.license_ownership)"/>
+                                    <div>
+                                        <label class="fnt">Conditions</label>
+                                    </div>
+                                    <ul class="conditions">
+                                        <li>Rental information</li>
+                                        <li>Terms and Conditions</li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix">&nbsp;</div>
+                            </div>
+                            <div class="col-md-8 col-sm-8">
+                                <div class="selectExtras">
+                                    <h3 class="h3">Payment Details</h3>
+                                    <form id="carPaymentFrm" name="carPaymentFrm">
+                                        <div class="allBorder">
+
+                                            <div class="paymentDetails">
+
+                                                <h4 class="h4">
+                                                    <i class="fa fa-info-circle"></i>
+                                                    We are processing your payment now. Please do not refresh or click the back button of your browser.
+                                                </h4>
+
+
+
+                                                <!-- Payment details -->
+
+                                                <div class="row">
+                                                    <div class="col-md-5 col-sm-5">
+                                                        <label>Payment Details</label>
+                                                    </div>
+                                                    <div class="col-md-7 col-sm-7">
+                                                        <div class="form-group"><img src="http://i76.imgup.net/accepted_c22e0.png"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-md-12 col-sm-12">
+
+                                                        <braintree-dropin
+                                                            options="dropinOptions"
+                                                            >Loading payment form...</braintree-dropin>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <a ng-click="getAliPayHtml();" style="cursor: pointer;" ng-show="showAlipayBtn" >
+                                                            <img src="assets/img/alipay_logo/165x58.png">
+                                                        </a>
+                                                        <button class="btn-next nexttab" id="" type="button" ng-hide="showAlipayBtn" >
+                                                            Please Wait <i class="fa fa-spin fa-spinner"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div class="clearfix">&nbsp;</div>
+                                            <div class="bgLight">
+                                                <div class="col-md-8 col-sm-8 col-xs-4">
+                                                    <label class="fnt1">Total:</label>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-8 alignRight">
+                                                    <label class="fnt1">{{selectedCurrency}} {{(selCarObj.selling_price + totalExtraAmount) | currency:" "}}</label>
+                                                </div>
+                                                <div align="center" ng-show="showActionBtn">
+                                                    <button class="btn-next nexttab" id="" type="submit" >BOOK AND PAY NOW</button>
+                                                    <br/>
+                                                    <small style="color:#419116;">No card fees</small> 
+                                                </div>
+
+                                                <div align="center" ng-hide="showActionBtn">
+                                                    <button class="btn-next nexttab" id="" type="button" >
+                                                        Please Wait <i class="fa fa-spin fa-spinner"></i>
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <div style="padding-top:5px;">* Prices inclusive statutory taxes. These prices are only valid for online reservations. The total price stated includes all discounts.</div>
+                                    <div class="clearfix"></div>
+                                    <!-- <div align="center">
+                                          <button class="btn-next nexttab" id="" type="button">Continue</button>
+                                        </div>--> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Extras -->
+
+                    <!-- Details -->
+
+                    <!-- Payment -->
+
+                    <!-- Confirmation -->
+
+                </div>
+                <div class="clearfix">&nbsp;</div>
+                <div class="top" align="center"> 
+                    <!-- <button class="btn-next" id="prevtab" type="button">Prev</button>
+                        <button class="btn-next" id="nexttab" type="button">Next</button>--> 
+                </div>
+            </div>
+        </section>
+
+    </div> <!--ENF OF cls_search_cars -->
+
+
+
+
+
+
+
+
+    <login-modal-view></login-modal-view>
+    <signup-modal-view></signup-modal-view>
+
+</div> <!--ENF OF cls_main_div -->
+<!--footer start-->
+<main-footer-book></main-footer-book>
+<!--footer end-->

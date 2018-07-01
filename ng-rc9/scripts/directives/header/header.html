@@ -1,0 +1,58 @@
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="">
+                <div class="navbar-header col-md-8"> 
+                    <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>--> 
+                    <a class="navbar-brand" ui-sref="home"><img src="assets/img/logo.png" alt="" class="site-logo" /></a> 
+                    <span class="padTop"> 
+                        <span class="blackTras" translate="keywords_header.header_text"></span>
+                    </span> 
+                </div>    
+            </div>
+            <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle mobile-menu-toggle-button">
+            <ul id="plain-menu" class="mobile-toggleable-menu mobile-left">
+
+
+                <li class="dropdown nav_dropdown">
+                    <a id="navbar-list-currency" data-toggle="dropdown" class="dropdown-toggle" href="" aria-expanded="false">
+                        <img ng-src="assets/img/language_flag/{{selectLangCode}}.png" >
+                        <div class="flag-text ng-binding">{{selectLang}}</div>
+                    </a>
+                    <ul class="dropdown-menu nav_dropdown_menu">
+                        <li class="" ng-repeat="(key_lang, val_lang) in langs">
+                            <a href="" ng-click="setLang(key_lang);" atag class="ng-binding">
+                                <img ng-src="assets/img/language_flag/{{key_lang}}.png" class="">
+                                <span class="span_li_menu">{{val_lang}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ng-if="(!currentUser.id)"> 
+                    <a href="#" atag ng-click="showLogin();">
+                        <i class="fa fa-sign-in"></i>&nbsp; <span translate="keywords_header.login"></span>
+                    </a> 
+                </li>
+                <li class="none" ng-if="(!currentUser.id)"> 
+                    <a href="#" atag ng-click="showSignUp();">
+                        <i class="fa fa-pencil-square-o"></i>&nbsp; <span translate="keywords_header.sign_up"></span>
+                    </a> 
+                </li>
+
+                <li ng-if="(currentUser.id)"> 
+                    <a ui-sref="manage_reservation">
+                        <i class="fa fa-user"></i>&nbsp; <span translate="keywords_header.reservation"></span>
+                    </a> 
+                </li>
+                <li class="none" ng-if="(currentUser.id)"> 
+                    <a href="#" atag ng-click="doLogout();">
+                        <i class="fa fa-pencil-square-o"></i>&nbsp; <span translate="keywords_header.logout"></span>
+                    </a> 
+                </li>
+            </ul>
+            <label class="mobile-left mobmenu-toggle" for="mobile-menu-toggle">+</label>
+        </div>
+    </nav>
+</header>
+
